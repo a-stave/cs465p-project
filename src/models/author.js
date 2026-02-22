@@ -47,36 +47,20 @@ const Author = sequelize.define(
           : this.date_of_birth
             ? (lifespan += " - present")
             : false;
-        // this.date_of_birth
-        //   ? (lifespan += this.date_of_birth.getFullYear())
-        //   : (lifespan += "Unknown");
-        // this.date_of_death
-        //   ? (lifespan += ` - ${this.date_of_death.getFullYear()}`)
-        //   : this.date_of_birth
-        //     ? (lifespan += " - present")
-        //     : false;
         return lifespan;
+      },
+      date_of_birth_yyyy_mm_dd() {
+        return this.date_of_birth
+          ? DateTime.fromJSDate(this.date_of_birth).toISODate() // "YYYY-MM-DD"
+          : "";
+      },
+      date_of_death_yyyy_mm_dd() {
+        return this.date_of_death
+          ? DateTime.fromJSDate(this.date_of_death).toISODate()
+          : "";
       },
     },
   },
 );
-
-// Getter equivalent to the Mongoose virtual which returns a sanitized full name string for an author (for display or other usage)
-// NOTE: For some reason this doesn't work as a virtual property, so I've implemented it as a getter method instead. It can be accessed
-// as author.name, as we do in the tutorial.
-
-// Author.prototype.name = function () {
-//   let fullName = "";
-//   if (this.first_name && this.family_name) {
-//     fullName = `${this.family_name}, ${this.first_name}`;
-//   }
-
-//   return fullName;
-// };
-
-// // Virtual for author's URL
-// Author.prototype.url = function () {
-//   return `/catalog/author/${this.id}`;
-// };
 
 module.exports = Author;

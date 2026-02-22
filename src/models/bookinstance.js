@@ -30,6 +30,11 @@ const BookInstance = sequelize.define(
           DateTime.DATE_MED_WITH_WEEKDAY,
         );
       },
+      due_back_yyyy_mm_dd() {
+        return this.due_back
+          ? DateTime.fromJSDate(this.due_back).toISODate()
+          : "";
+      },
     },
   },
 );
