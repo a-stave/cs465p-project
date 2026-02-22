@@ -64,7 +64,7 @@ async function bookCreate(index, title, summary, isbn, author, genreList) {
 async function bookInstanceCreate(index, book, imprint, due_back, status) {
   const bookinstance = await BookInstance.create({
     imprint,
-    due_back: due_back || null,
+    due_back: due_back ?? undefined, // Use undefined to trigger default value, null overrides default
     status: status || "Maintenance",
     BookId: book.id, // Set the foreign key for the book association immediately to avoid error
   });
@@ -117,7 +117,7 @@ async function createBooks() {
     bookCreate(
       2,
       "The Slow Regard of Silent Things (Kingkiller Chronicle)",
-      "Deep below the University, there is a dark place...",
+      "Deep below the University, there is a dark place. Few people know of it: ...",
       "9780756411336",
       authors[0],
       [genres[0]],

@@ -1,13 +1,50 @@
-const Author = require("../models/author");
+const { Book, Author, Genre, BookInstance } = require("../models");
 
-// Display list of all Authors.
 exports.author_list = async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Author list");
+  try {
+    const allAuthors = await Author.findAll({
+      order: [["family_name", "ASC"]],
+    });
+
+    res.render("author_list", {
+      title: "Author List",
+      author_list: allAuthors,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 // Display detail page for a specific Author.
 exports.author_detail = async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: Author detail: ${req.params.id}`);
+  try {
+    const authorId = req.params.id;
+
+    // Get author and all books written by this author
+    const [author, allBooksByAuthor] = await Promise.all([
+      Author.findByPk(authorId),
+
+      Book.findAll({
+        where: { AuthorId: authorId },
+        attributes: ["id", "title", "summary"],
+        order: [["title", "ASC"]],
+      }),
+    ]);
+
+    if (!author) {
+      const err = new Error("Author not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    res.render("author_detail", {
+      title: "Author Detail",
+      author,
+      author_books: allBooksByAuthor,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 // Display Author create form on GET.
