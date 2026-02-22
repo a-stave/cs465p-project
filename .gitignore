@@ -1,7 +1,26 @@
-.env
+# Node
 node_modules/
-.vscode/
-.DS_Store
-dist/
-typescript/.cache/
 npm-debug.log
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# OS specific
+.DS_Store
+
+# Editor specific
+.vscode/
+
+# Build output
+dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
