@@ -16,6 +16,12 @@ const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 /**
+ * Set up Sequelize (SQLite) connection
+ */
+const { connectSequelize } = require("../db");
+connectSequelize();
+
+/**
  * Create HTTP server.
  */
 
