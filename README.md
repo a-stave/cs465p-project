@@ -4,9 +4,23 @@ My final project for _CS 465p: Full Stack Development_ implements a simple flash
 
 <br>
 
+## How to Run
+
+_Updated 2/24/26_
+
+1. On the command line enter `npm install` and `npm audit fix` to install and update dependencies
+
+2. Enter `node populate.js` to quickly a database with sample data (Optional)
+
+3. Enter `npm start` to start up server in normal configuration. Use `npm dev` to enable hot reload if you're making code changes and `npm server` to run server with console logs enabled.
+
+4. In your preferred web browser, navigate to `http://localhost:3000` to view the site.
+
+<br>
+
 ## Roadmap
 
-□ Convert [MDN Express tutorial](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/Tutorial_local_library_website) to use an embedded database like SQLite instead of MongoDB.
+✓ Convert [MDN Express tutorial](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/Tutorial_local_library_website) to use an embedded database like SQLite instead of MongoDB.
 
 □ Change underlying models to best suit flashcards: `question`, `answer`, possibly `img` if a flashcard uses media.
 

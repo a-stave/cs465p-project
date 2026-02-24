@@ -1,4 +1,4 @@
-const { Book, Author, Genre, BookInstance } = require("../models");
+const { Book, Author, Genre, BookInstance, sequelize } = require("../models");
 const { body, validationResult } = require("express-validator");
 
 exports.author_list = async (req, res, next) => {
