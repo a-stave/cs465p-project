@@ -7,32 +7,73 @@ html(lang='en')
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css", integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr", crossorigin="anonymous")
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js", integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    div(class='container-fluid')
-      div(class='row')
-        div(class='col-sm-2')
-          block sidebar
-            ul(class='sidebar-nav')
-              li
-                a(href='/catalog') Home
-              li
-                a(href='/catalog/books') All books
-              li
-                a(href='/catalog/authors') All authors
-              li
-                a(href='/catalog/genres') All genres
-              li
-                a(href='/catalog/bookinstances') All book-instances
-              li
-                hr
-              li
-                a(href='/catalog/author/create') Create new author
-              li
-                a(href='/catalog/genre/create') Create new genre
-              li
-                a(href='/catalog/book/create') Create new book
-              li
-                a(href='/catalog/bookinstance/create') Create new book instance (copy)
+body 
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+    a.navbar-brand(href='/') Flashcard App
+    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
 
-        div(class='col-sm-10')
-          block content
+    div#navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.me-auto
+        li.nav-item
+          a.nav-link(href='/catalog') Home
+        li.nav-item
+          a.nav-link(href='/catalog/books') Books
+        li.nav-item
+          a.nav-link(href='/catalog/authors') Authors
+        li.nav-item
+          a.nav-link(href='/catalog/genres') Genres
+        li.nav-item
+          a.nav-link(href='/catalog/bookinstances') Selection
+
+      ul.navbar-nav.ms-auto
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+            | Create
+          div.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+            a.dropdown-item(href='/catalog/author/create') Create new author
+            a.dropdown-item(href='/catalog/genre/create') Create new genre
+            a.dropdown-item(href='/catalog/book/create') Create new book
+            a.dropdown-item(href='/catalog/bookinstance/create') Create new book instance (copy)
+
+  //- main.container.mt-4
+  main.container.mt-4#main-content
+    block content
+
+
+  footer.footer.mt-auto.py-3.bg-dark.text-white.text-center
+    .container
+      span &copy; 2024 Flashcard App. All rights reserved.
+      |  | 
+      a(href='https://github.com/a-stave/cs465p-project') GitHub Repository
+
+//- Old layout with sidebar
+  //- body
+  //-   div(class='container-fluid')
+  //-     div(class='row' style='background-color: #ff0000;')
+  //-       nav(class='col-sm-2' style='background-color: #00ff00;')
+  //-         block sidebar
+  //-           ul(class='sidebar-nav' style='background-color: #ffff00;')
+  //-             li
+  //-               a(href='/catalog') Home
+  //-             li
+  //-               a(href='/catalog/books') All books
+  //-             li
+  //-               a(href='/catalog/authors') All authors
+  //-             li
+  //-               a(href='/catalog/genres') All genres
+  //-             li
+  //-               a(href='/catalog/bookinstances') All book-instances
+  //-             li
+  //-               hr
+  //-             li
+  //-               a(href='/catalog/author/create') Create new author
+  //-             li
+  //-               a(href='/catalog/genre/create') Create new genre
+  //-             li
+  //-               a(href='/catalog/book/create') Create new book
+  //-             li
+  //-               a(href='/catalog/bookinstance/create') Create new book instance (copy)
+
+  //-       div(class='col-sm-10' style='background-color: #0000ff;')
+  //-         block content

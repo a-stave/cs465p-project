@@ -12,3 +12,25 @@ a {
   padding: 0;
   list-style: none;
 }
+
+main {
+  margin-top: 20px;
+  /* background-color: red; */
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#main-content {
+  flex: 1;
+  width: 80%;
+  background-color: red;
+}
