@@ -9,12 +9,26 @@ const MultipleChoice = sequelize.define(
       allowNull: false,
     },
     options: {
-      type: DataTypes.ARRAY(DataTypes.STRING), // Array of strings for options
+      type: DataTypes.JSON,
       allowNull: false,
+      validate: {
+        isArray(value) {
+          if (!Array.isArray(value)) {
+            throw new Error("Options must be an array");
+          }
+        },
+      },
     },
     correctAnswer: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isInOptions(value) {
+          if (!this.options.includes(value)) {
+            throw new Error("correctAnswer must be one of the options");
+          }
+        },
+      },
     },
     imageUrl: {
       type: DataTypes.STRING,
@@ -28,7 +42,7 @@ const MultipleChoice = sequelize.define(
   {
     getterMethods: {
       url() {
-        return `/catalog/multiple-choice/${this.id}`;
+        return `/multiple-choice/${this.id}`;
       },
     },
   },

@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+
+  if deck_list.length
+    ul
+      each deck in deck_list
+        li
+          a(href=deck.url)= deck.name
+          if deck.description
+            |  — #{deck.description}
+  else
+    p No decks found.

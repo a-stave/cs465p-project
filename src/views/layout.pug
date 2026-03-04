@@ -7,43 +7,40 @@ html(lang='en')
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css", integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr", crossorigin="anonymous")
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js", integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
-body 
-  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-    a.navbar-brand(href='/') Flashcard App
-    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
-      span.navbar-toggler-icon
 
-    div#navbarNav.collapse.navbar-collapse
-      ul.navbar-nav.me-auto
-        li.nav-item
-          a.nav-link(href='/catalog') Home
-        li.nav-item
-          a.nav-link(href='/catalog/books') Books
-        li.nav-item
-          a.nav-link(href='/catalog/authors') Authors
-        li.nav-item
-          a.nav-link(href='/catalog/genres') Genres
-        li.nav-item
-          a.nav-link(href='/catalog/bookinstances') Selection
+  body 
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      a.navbar-brand(href='/') Flashcard App
+      button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
 
-      ul.navbar-nav.ms-auto
-        li.nav-item.dropdown
-          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
-            | Create
-          div.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
-            a.dropdown-item(href='/catalog/author/create') Create new author
-            a.dropdown-item(href='/catalog/genre/create') Create new genre
-            a.dropdown-item(href='/catalog/book/create') Create new book
-            a.dropdown-item(href='/catalog/bookinstance/create') Create new book instance (copy)
+      div#navbarNav.collapse.navbar-collapse
+        ul.navbar-nav.me-auto
+          li.nav-item
+            a.nav-link(href='/') Home
+          li.nav-item
+            a.nav-link(href='/cards') Cards
+          li.nav-item
+            a.nav-link(href='/decks') Decks
+          li.nav-item
+            a.nav-link(href='/multiple-choice') Multiple Choice
 
-  //- main.container.mt-4
-  main.container.mt-4#main-content
-    block content
+        ul.navbar-nav.ms-auto
+          li.nav-item.dropdown
+            a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+              | Create
+            div.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+              a.dropdown-item(href='/cards/create') Create new flashcard
+              a.dropdown-item(href='/decks/create') Create new deck
+              a.dropdown-item(href='/multiple-choice/create') Create new multiple-choice question
 
+    main.container.mt-4#main-content
+      block content
 
-  footer.footer.mt-auto.py-3.bg-dark.text-white.text-center
-    .container
-      span &copy; 2024 Flashcard App. All rights reserved.
+    footer.footer.mt-auto.py-3.bg-dark.text-white.text-center
+      .container
+        span &copy; 2026 Flashcard App. All rights reserved.
+
       |  | 
       a(href='https://github.com/a-stave/cs465p-project') GitHub Repository
 

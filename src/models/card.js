@@ -17,7 +17,7 @@ const Card = sequelize.define(
   {
     getterMethods: {
       url() {
-        return `/catalog/card/${this.id}`;
+        return `/cards/${this.id}`;
       },
     },
   },

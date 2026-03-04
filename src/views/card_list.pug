@@ -1,0 +1,18 @@
+extends layout 
+
+block content 
+  h1= title
+
+  if card_list.length
+    ul
+      each card in card_list
+        li
+          a(href=card.url)= card.question
+          |  — #{card.answer}
+          if card.Decks && card.Decks.length
+            ul
+              each deck in card.Decks
+                li
+                  a(href=deck.url)= deck.name
+  else
+    p There are no cards.

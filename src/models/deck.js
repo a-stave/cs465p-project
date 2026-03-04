@@ -28,7 +28,7 @@ const Deck = sequelize.define(
   {
     getterMethods: {
       url() {
-        return `/catalog/deck/${this.id}`;
+        return `/decks/${this.id}`;
       },
     },
   },

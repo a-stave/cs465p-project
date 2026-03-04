@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
-
-/* GET home page. Deprecated HOME in favor of redirecting to /catalog. */
-// router.get("/", function (req, res, next) {
-//   res.render("index", { title: "Express" });
-// });
+const catalogController = require("../controllers/catalogController");
 
 // GET home page.
-router.get("/", (req, res) => {
-  res.redirect("/catalog");
-});
+router.get("/", catalogController.index);
+
+// Library redirect home to /catalog
+// router.get("/", (req, res) => {
+//   res.redirect("/catalog");
+// });
 
 module.exports = router;

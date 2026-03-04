@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= mcq.question
+
+  if mcq.imageUrl
+    img(src=mcq.imageUrl, alt="Question image", style="max-width:300px;margin-bottom:10px;")
+
+  h3 Options
+  ul
+    each opt in mcq.options
+      if opt === mcq.correctAnswer
+        li
+          strong= opt
+      else
+        li= opt
+
+  if decks.length
+    h3 Decks
+    ul
+      each deck in decks
+        li
+          a(href=deck.url)= deck.name
+  else
+    p This question is not in any decks.
+
+  hr
+
+  p
+    a(href=mcq.url + '/update') Update question
+  p
+    a(href=mcq.url + '/delete') Delete question

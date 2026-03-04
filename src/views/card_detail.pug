@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1= title
+
+  dl
+    dt Question
+    dd= card.question
+
+    dt Answer
+    dd= card.answer
+
+  if decks && decks.length
+    h4 Decks
+    ul
+      each deck in decks
+        li
+          a(href=deck.url)= deck.name
+          if deck.description
+            |  — #{deck.description}
+  else
+    p This card is not in any decks.
+
+  hr
+
+  p
+    a(href=card.url + '/update') Update card
+  p
+    a(href=card.url + '/delete') Delete card
