@@ -10,7 +10,7 @@ exports.mcq_list = async (req, res, next) => {
       include: Deck,
     });
 
-    res.render("mcq_list", {
+    res.render("pages/mcq_list", {
       title: "Multiple Choice Questions",
       mcq_list: allMCQs,
     });
@@ -32,7 +32,7 @@ exports.mcq_detail = async (req, res, next) => {
       return next(err);
     }
 
-    res.render("mcq_detail", {
+    res.render("pages/mcq_detail", {
       title: mcq.question,
       mcq,
       decks: mcq.Decks,
@@ -47,7 +47,7 @@ exports.mcq_create_get = async (req, res, next) => {
   try {
     const allDecks = await Deck.findAll({ order: [["name", "ASC"]] });
 
-    res.render("mcq_form", {
+    res.render("pages/mcq_form", {
       title: "Create Multiple Choice Question",
       decks: allDecks,
     });
@@ -110,7 +110,7 @@ exports.mcq_create_post = [
       const allDecks = await Deck.findAll({ order: [["name", "ASC"]] });
       allDecks.forEach((d) => (d.checked = deckIds.includes(d.id.toString())));
 
-      return res.render("mcq_form", {
+      return res.render("pages/mcq_form", {
         title: "Create Multiple Choice Question",
         mcq: mcqData,
         decks: allDecks,
@@ -141,7 +141,7 @@ exports.mcq_delete_get = async (req, res, next) => {
       return next(err);
     }
 
-    res.render("mcq_delete", {
+    res.render("pages/mcq_delete", {
       title: "Delete Multiple Choice Question",
       mcq,
       decks: mcq.Decks,
@@ -165,7 +165,7 @@ exports.mcq_delete_post = async (req, res, next) => {
     }
 
     if (mcq.Decks.length > 0) {
-      return res.render("mcq_delete", {
+      return res.render("pages/mcq_delete", {
         title: "Delete Multiple Choice Question",
         mcq,
         decks: mcq.Decks,
@@ -197,7 +197,7 @@ exports.mcq_update_get = async (req, res, next) => {
     const mcqDeckIds = mcq.Decks.map((d) => d.id);
     allDecks.forEach((d) => (d.checked = mcqDeckIds.includes(d.id)));
 
-    res.render("mcq_form", {
+    res.render("pages/mcq_form", {
       title: "Update Multiple Choice Question",
       mcq,
       decks: allDecks,
@@ -262,7 +262,7 @@ exports.mcq_update_post = [
       const allDecks = await Deck.findAll({ order: [["name", "ASC"]] });
       allDecks.forEach((d) => (d.checked = deckIds.includes(d.id.toString())));
 
-      return res.render("mcq_form", {
+      return res.render("pages/mcq_form", {
         title: "Update Multiple Choice Question",
         mcq: updatedData,
         decks: allDecks,

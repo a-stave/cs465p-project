@@ -10,7 +10,7 @@ exports.deck_list = async (req, res, next) => {
       order: [["name", "ASC"]],
     });
 
-    res.render("deck_list", {
+    res.render("pages/deck_list", {
       title: "Deck List",
       deck_list: allDecks,
     });
@@ -32,7 +32,7 @@ exports.deck_detail = async (req, res, next) => {
       return next(err);
     }
 
-    res.render("deck_detail", {
+    res.render("pages/deck_detail", {
       title: deck.name,
       deck,
       cards: deck.Cards,
@@ -51,7 +51,7 @@ exports.deck_create_get = async (req, res, next) => {
       MultipleChoice.findAll({ order: [["id", "ASC"]] }),
     ]);
 
-    res.render("deck_form", {
+    res.render("pages/deck_form", {
       title: "Create Deck",
       cards: allCards,
       mcqs: allMCQs,
@@ -95,7 +95,7 @@ exports.deck_create_post = [
       allCards.forEach((c) => (c.checked = cardIds.includes(c.id.toString())));
       allMCQs.forEach((m) => (m.checked = mcqIds.includes(m.id.toString())));
 
-      return res.render("deck_form", {
+      return res.render("pages/deck_form", {
         title: "Create Deck",
         deck: deckData,
         cards: allCards,
@@ -129,7 +129,7 @@ exports.deck_delete_get = async (req, res, next) => {
       return next(err);
     }
 
-    res.render("deck_delete", {
+    res.render("pages/deck_delete", {
       title: "Delete Deck",
       deck,
       cards: deck.Cards,
@@ -154,7 +154,7 @@ exports.deck_delete_post = async (req, res, next) => {
     }
 
     if (deck.Cards.length > 0 || deck.MultipleChoices.length > 0) {
-      return res.render("deck_delete", {
+      return res.render("pages/deck_delete", {
         title: "Delete Deck",
         deck,
         cards: deck.Cards,
@@ -192,7 +192,7 @@ exports.deck_update_get = async (req, res, next) => {
     allCards.forEach((c) => (c.checked = deckCardIds.includes(c.id)));
     allMCQs.forEach((m) => (m.checked = deckMCQIds.includes(m.id)));
 
-    res.render("deck_form", {
+    res.render("pages/deck_form", {
       title: "Update Deck",
       deck,
       cards: allCards,
@@ -239,7 +239,7 @@ exports.deck_update_post = [
       allCards.forEach((c) => (c.checked = cardIds.includes(c.id.toString())));
       allMCQs.forEach((m) => (m.checked = mcqIds.includes(m.id.toString())));
 
-      return res.render("deck_form", {
+      return res.render("pages/deck_form", {
         title: "Update Deck",
         deck: updatedData,
         cards: allCards,

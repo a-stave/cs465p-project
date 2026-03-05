@@ -10,7 +10,7 @@ exports.card_list = async (req, res, next) => {
       include: Deck,
     });
 
-    res.render("card_list", {
+    res.render("pages/card_list", {
       title: "Card List",
       card_list: allCards,
     });
@@ -32,7 +32,7 @@ exports.card_detail = async (req, res, next) => {
       return next(err);
     }
 
-    res.render("card_detail", {
+    res.render("pages/card_detail", {
       title: "Card Detail",
       card,
       decks: card.Decks,
@@ -47,7 +47,7 @@ exports.card_create_get = async (req, res, next) => {
   try {
     const allDecks = await Deck.findAll({ order: [["name", "ASC"]] });
 
-    res.render("card_form", {
+    res.render("pages/card_form", {
       title: "Create Card",
       decks: allDecks,
     });
@@ -86,7 +86,7 @@ exports.card_create_post = [
         deck.checked = deckIds.includes(deck.id.toString());
       });
 
-      return res.render("card_form", {
+      return res.render("pages/card_form", {
         title: "Create Card",
         card: cardData,
         decks: allDecks,
@@ -118,7 +118,7 @@ exports.card_delete_get = async (req, res, next) => {
       return next(err);
     }
 
-    res.render("card_delete", {
+    res.render("pages/card_delete", {
       title: "Delete Card",
       card,
       decks: card.Decks,
@@ -169,7 +169,7 @@ exports.card_update_get = async (req, res, next) => {
       deck.checked = cardDeckIds.includes(deck.id);
     });
 
-    res.render("card_form", {
+    res.render("pages/card_form", {
       title: "Update Card",
       card,
       decks: allDecks,
@@ -209,7 +209,7 @@ exports.card_update_post = [
         deck.checked = deckIds.includes(deck.id.toString());
       });
 
-      return res.render("card_form", {
+      return res.render("pages/card_form", {
         title: "Update Card",
         card: updatedData,
         decks: allDecks,

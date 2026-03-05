@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
   h1= title
@@ -12,3 +12,6 @@ block content
             |  — #{deck.description}
   else
     p No decks found.
+
+block scripts 
+  script(src="/javascripts/quiz.js")

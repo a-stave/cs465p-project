@@ -1,15 +1,18 @@
 doctype html
 html(lang='en')
-  include includes/head.pug
+  include partials/head.pug
 
   body 
     header
-      include includes/navbar.pug
+      include partials/navbar.pug
 
-    main.container.mt-4#main-content
+    main.container.mt-3#main-content
       block content
 
-    include includes/footer.pug
+    include partials/footer.pug
+
+    //- In case of view-specific scripts
+    include partials/scripts.pug
 
 //- Old layout with sidebar
   //- body

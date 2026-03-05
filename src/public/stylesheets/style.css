@@ -1,16 +1,44 @@
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* Many of these styles were taken from the final project I made for CS 463 */
+
+* {
+  box-sizing: border-box;
 }
 
-a {
-  color: #00B7FF;
-} */
+:root {
+  color-scheme: light dark;
+  --text-light: #333;
+  --background-light: white;
+  --backdrop-light: #ddd;
+  --header-light: #333;
+  --accent-light: #ff3c00;
+  --text-dark: #ddd;
+  --background-dark: #1a2a3c;
+  --backdrop-dark: #171d25;
+  --header-dark: #12171e;
+  --accent-dark: #0bb5ff;
+}
 
-.sidebar-nav {
-  margin-top: 20px;
-  padding: 0;
-  list-style: none;
+html {
+  font-size: 18px;
+  scroll-behavior: smooth;
+  min-height: 100%;
+}
+
+body {
+  font:
+    400 1rem/2 "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+  margin: 0;
+  color: light-dark(var(--text-light), var(--text-dark));
+  background-color: light-dark(var(--backdrop-light), var(--backdrop-dark));
+
+  /* Holdover from current styles */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
@@ -18,19 +46,14 @@ main {
   /* background-color: red; */
 }
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.sidebar-nav {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
 }
 
 #main-content {
   flex: 1;
   width: 80%;
-  background-color: lightgrey;
+  /* background-color: lightgrey; */
 }

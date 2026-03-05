@@ -1,0 +1,5 @@
+mixin deckList(decks)
+  ul.deck-list
+    each deck in decks
+      li
+        a(href=`/decks/${deck.id}`)= deck.name
