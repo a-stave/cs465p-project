@@ -1,24 +1,58 @@
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-    a.navbar-brand(href='/') Flashcard App
-    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
-        span.navbar-toggler-icon
+nav.navbar.site-header.navbar-expand-lg.navbar-dark.p-2
+  a.navbar-brand(href='/') Navbar
+  button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarNavDropdown.collapse.navbar-collapse
+    ul.navbar-nav
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' id='decksDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false') Decks
+        ul.dropdown-menu(aria-labelledby='decksDropdown')
+          li
+            a.dropdown-item(href='/decks') All Decks
+          li
+            a.dropdown-item(href='/decks/create') Create a Deck
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' id='flashDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false') Flashcards
+        ul.dropdown-menu(aria-labelledby='flashDropdown')
+          li
+            a.dropdown-item(href='/cards') All Flashcards
+          li
+            a.dropdown-item(href='/cards/create') Create a Flashcard
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(href='#' id='mcqDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false') Multiple-Choice
+        ul.dropdown-menu(aria-labelledby='mcqDropdown')
+          li
+            a.dropdown-item(href='/multiple-choice') All Multiple Choice
+          li
+            a.dropdown-item(href='/multiple-choice/create') Create a Multiple Choice
 
-    div#navbarNav.collapse.navbar-collapse
-        ul.navbar-nav.me-auto
-            li.nav-item
-                a.nav-link(href='/') Home
-            li.nav-item
-                a.nav-link(href='/cards') Cards
-            li.nav-item
-                a.nav-link(href='/decks') Decks
-            li.nav-item
-                a.nav-link(href='/multiple-choice') Multiple Choice
 
-        ul.navbar-nav.ms-auto
-            li.nav-item.dropdown
-                a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
-                    | Create
-                div.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
-                    a.dropdown-item(href='/cards/create') Create new flashcard
-                    a.dropdown-item(href='/decks/create') Create new deck
-                    a.dropdown-item(href='/multiple-choice/create') Create new multiple-choice question
+//-                 a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+//-                     | Create
+//-                 div.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+
+
+//- nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+//-     a.navbar-brand(href='/') Flashcard App
+//-     button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+//-         span.navbar-toggler-icon
+
+//-     div#navbarNav.collapse.navbar-collapse
+//-         ul.navbar-nav.me-auto
+//-             li.nav-item
+//-                 a.nav-link(href='/') Home
+//-             li.nav-item
+//-                 a.nav-link(href='/cards') Cards
+//-             li.nav-item
+//-                 a.nav-link(href='/decks') Decks
+//-             li.nav-item
+//-                 a.nav-link(href='/multiple-choice') Multiple Choice
+
+//-         ul.navbar-nav.ms-auto
+//-             li.nav-item.dropdown
+//-                 a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+//-                     | Create
+//-                 div.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+//-                     a.dropdown-item(href='/cards/create') Create new flashcard
+//-                     a.dropdown-item(href='/decks/create') Create new deck
+//-                     a.dropdown-item(href='/multiple-choice/create') Create new multiple-choice question

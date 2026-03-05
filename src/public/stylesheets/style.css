@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+/* TODO: I feel like `x-light` should be light THEME not light COLOR, etc.*/
 :root {
   color-scheme: light dark;
   --text-light: #333;
@@ -42,18 +43,41 @@ body {
 }
 
 main {
-  margin-top: 20px;
-  /* background-color: red; */
 }
 
+#main-content {
+  flex: auto;
+  align-content: center;
+  align-items: center;
+  padding: 0 5rem;
+  /* In `layout.pug` the .container Bootstrap utility adds default margin to either side */
+  /* width: 20%; */
+  background-color: light-dark(var(--background-light), var(--background-dark));
+}
+
+/* Deprecated from library */
 .sidebar-nav {
   margin-top: 20px;
   padding: 0;
   list-style: none;
 }
 
-#main-content {
-  flex: 1;
-  width: 80%;
-  /* background-color: lightgrey; */
+.site-header,
+.site-footer {
+  color: light-dark(var(--text-dark), var(--text-dark));
+  background-color: light-dark(var(--header-light), var(--header-dark));
+
+  .dropdown-menu {
+    background-color: light-dark(var(--header-light), var(--header-dark));
+  }
+
+  a {
+    color: light-dark(var(--text-dark), var(--text-dark));
+  }
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  padding: 0 1rem;
 }

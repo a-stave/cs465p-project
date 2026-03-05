@@ -6,41 +6,8 @@ html(lang='en')
     header
       include partials/navbar.pug
 
-    main.container.mt-3#main-content
+    main.container#main-content
       block content
 
     include partials/footer.pug
-
-    //- In case of view-specific scripts
     include partials/scripts.pug
-
-//- Old layout with sidebar
-  //- body
-  //-   div(class='container-fluid')
-  //-     div(class='row' style='background-color: #ff0000;')
-  //-       nav(class='col-sm-2' style='background-color: #00ff00;')
-  //-         block sidebar
-  //-           ul(class='sidebar-nav' style='background-color: #ffff00;')
-  //-             li
-  //-               a(href='/catalog') Home
-  //-             li
-  //-               a(href='/catalog/books') All books
-  //-             li
-  //-               a(href='/catalog/authors') All authors
-  //-             li
-  //-               a(href='/catalog/genres') All genres
-  //-             li
-  //-               a(href='/catalog/bookinstances') All book-instances
-  //-             li
-  //-               hr
-  //-             li
-  //-               a(href='/catalog/author/create') Create new author
-  //-             li
-  //-               a(href='/catalog/genre/create') Create new genre
-  //-             li
-  //-               a(href='/catalog/book/create') Create new book
-  //-             li
-  //-               a(href='/catalog/bookinstance/create') Create new book instance (copy)
-
-  //-       div(class='col-sm-10' style='background-color: #0000ff;')
-  //-         block content
