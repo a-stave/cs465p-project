@@ -1,5 +1,4 @@
 /* Many of these styles were taken from the final project I made for CS 463 */
-
 * {
   box-sizing: border-box;
 }
@@ -45,36 +44,18 @@ body {
   min-height: 100vh;
 }
 
-/* What is wrong with this... Height 100vh pushes it offscreen but 50vh is perfect,
-while height 50% or 100% or whatever just causes the entire UI to disappear. I used the magenta
-border trick to see its shape and it was there but the UI still disappeared! T_T */
 main {
   flex: 1;
-  height: 50vh;
   position: relative;
+  display: flex;
 }
 
 #main-content {
-  flex: auto;
-  align-content: center;
-  align-items: center;
+  /* flex: 1; */
+  display: flex;
+  justify-content: center;
   padding: 0 1.5rem;
-  /* In `layout.pug` the .container Bootstrap utility adds default margin to either side */
-  /* width: 20%; */
   background-color: light-dark(var(--background-light), var(--background-dark));
-}
-
-/* .navbar-collapse {
-  position: relative;
-  z-index: 9999 !important;
-  background-color: red;
-} */
-
-/* Deprecated from library */
-.sidebar-nav {
-  margin-top: 20px;
-  padding: 0;
-  list-style: none;
 }
 
 /* Default desktop look */
@@ -97,49 +78,54 @@ main {
   height: var(--footer-height);
 }
 
-.home {
+#home {
+  display: flex;
   position: relative;
-  min-height: 100%;
-  overflow: hidden;
+  flex: 1;
+}
+
+.offcanvas-backdrop.show {
+  opacity: 0.4;
+}
+
+/* WHAT!? */
+.navbar .dropdown-menu {
+  z-index: 2000;
 }
 
 .prompt {
   position: absolute;
-  top: 30vh;
+  top: 32vh;
   left: 50%;
   transform: translateX(-50%);
   width: min(90%, 28rem);
-  font-size: 1.4rem;
-  line-height: 1.4rem;
-  text-align: left;
+}
+
+.prompt-static {
+  white-space: normal;
 }
 
 .prompt-line {
   display: inline;
-  white-space: normal;
-}
-
-.prompt-static {
-  white-space: nowrap;
 }
 
 .typewrite {
-  white-space: normal;
+  display: inline;
 }
 
-.home-start-button {
+#home-start-button {
   position: absolute;
-  top: 70vh;
+  bottom: 12vh;
   left: 50%;
   transform: translateX(-50%);
+
   padding: 0.75rem 2rem;
   border-radius: 0.5rem;
+
   background-color: light-dark(var(--accent-light), var(--accent-dark));
   color: white;
   text-decoration: none;
   font-weight: bold;
-  /* Float above text if necessary */
-  z-index: 2;
 }
 
 .typewrite > .wrap {
@@ -190,102 +176,8 @@ main {
   }
 }
 
-/* Hide footer entirely on small screens */
-@media (max-width: 576px) {
+@media (pointer: coarse) {
   .site-footer {
     display: none;
   }
 }
-
-/*.site-header,
-.site-footer {
-  background-color: light-dark(var(--header-light), var(--header-dark));
-  color: light-dark(var(--text-dark), var(--text-dark));
-
-  .dropdown-menu {
-    background-color: light-dark(var(--header-light), var(--header-dark));
-  }
-
-  a {
-    color: light-dark(var(--text-dark), var(--text-dark));
-  }
-}
-
-.site-footer {
-  font-size: 0.8rem;
-}
-
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bolder;
-  padding: 0 1rem;
-}
-
-.home {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  min-height: (100vh - var(--navbar-height));
-}
-
-.prompt {
-  max-width: 28rem;
-  width: 90%;
-  margin: 0 auto;
-  font-size: 1.4rem;
-  line-height: 1.4;
-  text-align: left;
-}
-  
-.prompt-line {
-  display: inline;
-  white-space: normal;
-}
-
-.prompt-static {
-  white-space: nowrap;
-  font-weight: bolder;
-  padding-right: 0.3rem;
-}
-
-.typewrite {
-  white-space: normal;
-}
-  
-.home-start-button {
-  font:
-    1.4rem bolder Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
-  text-decoration: none;
-  position: absolute;
-  top: 30vh;
-  background-color: light-dark(var(--accent-light), var(--accent-dark));
-  color: light-dark(var(--text-dark), var(--text-dark));
-  padding: 0.8rem 3rem;
-  border-radius: 1rem;
-}
-  
-@media (max-width: 576px) {
-  .site-header {
-    background-color: light-dark(
-      var(--background-light),
-      var(--background-dark)
-    );
-  }
-  .site-footer {
-    display: none;
-  }
-}
-
-@media (min-width: 576.1px) {
-  .site-header,
-  .site-footer {
-    background-color: light-dark(var(--header-light), var(--header-dark));
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-}
-*/

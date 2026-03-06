@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  .home
+  #home
     .prompt
       span.prompt-line
         span.prompt-static I want to learn about 
         span.typewrite(
           data-period="4000"
-          data-type='["countries of the world", "U.S. state capitals", "the periodic table", "famous painters", "computer science terms"]'
-        )
+          data-type='["Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ea quasi sed recusandae praesentium, et fugit delectus aliquam nam reiciendis libero neque, vero, qui voluptates ad eveniet magni veritatis eligendi.", "countries of the world", "U.S. state capitals", "the periodic table", "famous painters", "computer science terms"]'
+        ) 
           span.wrap
 
-    a.home-start-button(href='/decks/create') Start
+    a#home-start-button(href='/decks/create') Start
