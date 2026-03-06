@@ -64,6 +64,12 @@ main {
   background-color: light-dark(var(--background-light), var(--background-dark));
 }
 
+/* .navbar-collapse {
+  position: relative;
+  z-index: 9999 !important;
+  background-color: red;
+} */
+
 /* Deprecated from library */
 .sidebar-nav {
   margin-top: 20px;
@@ -79,6 +85,8 @@ main {
   height: var(--header-height);
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 1000;
 }
 
 .site-footer {
