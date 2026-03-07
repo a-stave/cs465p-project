@@ -269,6 +269,10 @@ exports.playDeck = async (req, res, next) => {
 
     if (!deck) return res.status(404).send("Deck not found");
 
+    // Normalize
+    deck.cards = deck.Cards || [];
+    deck.multipleChoices = deck.MultipleChoices || [];
+
     res.render("pages/deck_play", { title: `Play: ${deck.name}`, deck });
   } catch (err) {
     next(err);
