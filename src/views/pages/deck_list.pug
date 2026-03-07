@@ -1,17 +1,11 @@
 extends ../layout
+include ../partials/components/collapsible_list.pug
 
 block content
-  h1= title
+  section.list-container
+    h1= title
+    +collapsibleList(deck_list, "decks", "deck")
 
-  if deck_list.length
-    ul
-      each deck in deck_list
-        li
-          a(href=deck.url)= deck.name
-          if deck.description
-            |  — #{deck.description}
-  else
-    p No decks found.
 
 block scripts 
   script(src="/javascripts/quiz.js")

@@ -1,0 +1,36 @@
+mixin collapsibleList(items, baseRoute, type)
+  ul.collapsible-list
+    each item in items
+      li.list-row
+        details
+          summary
+            span.item-title
+              if type === 'deck'
+                = item.name
+              else
+                = item.question
+
+            span.item-actions
+              // Edit button
+              a.icon-btn(href=`/${baseRoute}/${item.id}/update`, aria-label="Edit") ✏️
+
+              // Delete button
+              a.icon-btn.delete(href=`/${baseRoute}/${item.id}/delete`, aria-label="Delete") 🗑
+
+              // Play button — only for decks
+              if type === 'deck'
+                a.icon-btn.play(href=`/${baseRoute}/${item.id}/play`, aria-label="Play") ▶️
+
+          .item-body
+            if type === 'deck'
+              p= item.description || 'No description'
+            else if type === 'card'
+              p.answer= item.answer
+            else if type === 'mcq'
+              ul
+                each option in item.options
+                  if option === item.correctAnswer
+                    li
+                      b= option
+                  else
+                    li= option

@@ -1,0 +1,25 @@
+extends ../layout
+include ../partials/components/_card_slide.pug
+include ../partials/components/_mcq_slide.pug
+
+block content
+  section.play-deck.text-center
+    h1= deck.name
+    if deck.description
+      p.mb-4= deck.description
+
+    #deckCarousel.carousel.slide(data-bs-ride="carousel")
+      .carousel-inner
+        if deck.cards && deck.cards.length
+          each card, i in deck.cards
+            +cardSlide(card, i === 0 ? 'active' : '')
+        else if deck.multipleChoices && deck.multipleChoices.length
+          each mcq, i in deck.multipleChoices
+            +mcqSlide(mcq, i === 0 ? 'active' : '')
+
+      button.carousel-control-prev(type="button", data-bs-target="#deckCarousel", data-bs-slide="prev")
+        span.carousel-control-prev-icon
+        span.visually-hidden Previous
+      button.carousel-control-next(type="button", data-bs-target="#deckCarousel", data-bs-slide="next")
+        span.carousel-control-next-icon
+        span.visually-hidden Next

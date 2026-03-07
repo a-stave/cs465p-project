@@ -20,7 +20,10 @@ router.post("/:id/delete", deckController.deck_delete_post);
 router.get("/:id/update", deckController.deck_update_get);
 router.post("/:id/update", deckController.deck_update_post);
 
-// Deck detail (must come last)
+// Deck detail (must come last?)
 router.get("/:id", deckController.deck_detail);
+
+// Deck play
+router.get("/:id/play", deckController.playDeck);
 
 module.exports = router;

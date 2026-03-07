@@ -260,3 +260,17 @@ exports.deck_update_post = [
     }
   },
 ];
+
+exports.playDeck = async (req, res, next) => {
+  try {
+    const deck = await Deck.findByPk(req.params.id, {
+      include: [{ model: Card }, { model: MultipleChoice }],
+    });
+
+    if (!deck) return res.status(404).send("Deck not found");
+
+    res.render("pages/deck_play", { title: `Play: ${deck.name}`, deck });
+  } catch (err) {
+    next(err);
+  }
+};

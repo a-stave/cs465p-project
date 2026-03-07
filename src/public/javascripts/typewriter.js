@@ -5,6 +5,7 @@ class Typewriter {
   constructor(el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
+    this.wrap = el.querySelector(".wrap");
     this.loopNum = 0;
     this.period = parseInt(period, 10) || 2000;
     this.txt = "";
@@ -15,7 +16,7 @@ class Typewriter {
   tick() {
     const i = this.loopNum % this.toRotate.length;
     const fullTxt = this.toRotate[i];
-    const wrap = this.el.querySelector(".wrap");
+    const wrap = this.wrap;
 
     if (this.isDeleting) {
       this.txt = fullTxt.substring(0, this.txt.length - 1);
@@ -33,7 +34,7 @@ class Typewriter {
       wrap.classList.add("cursor-blink");
     }
 
-    let delta = 150 - Math.random() * 80;
+    let delta = 120 - Math.random() * 80;
     if (this.isDeleting) delta /= 2;
 
     if (!this.isDeleting && this.txt === fullTxt) {

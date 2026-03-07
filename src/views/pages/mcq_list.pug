@@ -1,17 +1,7 @@
 extends ../layout
+include ../partials/components/collapsible_list.pug
 
 block content
-  h1= title
-
-  if mcq_list.length
-    ul
-      each mcq in mcq_list
-        li
-          a(href=mcq.url)= mcq.question
-          if mcq.Decks && mcq.Decks.length
-            ul
-              each deck in mcq.Decks
-                li
-                  a(href=deck.url)= deck.name
-  else
-    p No multiple-choice questions found.
+  section.list-container
+    h1= title
+    +collapsibleList(mcq_list, "multiple-choice", "mcq")
