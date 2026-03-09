@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 // Create a SQLite database stored in a file
 const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: "./library.db", // TODO this is the database file. Creates itself automatically.
+  storage: "./flashcard.db", // This is the database file. Creates itself automatically.
   logging: false, // Disable logging for cleaner output. Set to true to see SQL queries.
 });
 

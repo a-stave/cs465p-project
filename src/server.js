@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require("../app");
+const app = require("./app");
 const debug = require("debug")("src:server");
 const http = require("http");
 
@@ -18,7 +18,7 @@ app.set("port", port);
 /**
  * Set up Sequelize (SQLite) connection
  */
-const { connectSequelize } = require("../db");
+const { connectSequelize } = require("./config/database");
 connectSequelize();
 
 /**

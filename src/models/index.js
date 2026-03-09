@@ -1,8 +1,8 @@
-const { sequelize } = require("../db");
+const { sequelize } = require("../config/database");
 
-const Deck = require("./deck");
-const Card = require("./card");
-const MultipleChoice = require("./multipleChoice");
+const Deck = require("./Deck");
+const Card = require("./Card");
+const MultipleChoice = require("./MultipleChoice");
 
 // --- ASSOCIATIONS ---
 
@@ -14,32 +14,8 @@ Card.belongsToMany(Deck, { through: "DeckCards" });
 Deck.belongsToMany(MultipleChoice, { through: "DeckMultipleChoices" });
 MultipleChoice.belongsToMany(Deck, { through: "DeckMultipleChoices" });
 
-// Remove MDN code once you feel confident
-const Author = require("./author");
-const Book = require("./book");
-const Genre = require("./genre");
-const BookInstance = require("./bookinstance");
-
-// --- ASSOCIATIONS ---
-
-// Book -> Author (many books belong to one author)
-Book.belongsTo(Author, { foreignKey: { allowNull: false } });
-Author.hasMany(Book);
-
-// Book -> Genre (many-to-many)
-Book.belongsToMany(Genre, { through: "BookGenres" });
-Genre.belongsToMany(Book, { through: "BookGenres" });
-
-// BookInstance -> Book (many instances belong to one book)
-BookInstance.belongsTo(Book, { foreignKey: { allowNull: false } });
-Book.hasMany(BookInstance);
-
 module.exports = {
   sequelize,
-  Author,
-  Book,
-  Genre,
-  BookInstance,
   Deck,
   Card,
   MultipleChoice,

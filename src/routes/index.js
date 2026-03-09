@@ -1,13 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const catalogController = require("../controllers/catalogController");
+const homeController = require("../controllers/homeController");
 
 // GET home page.
-router.get("/", catalogController.index);
-
-// Library redirect home to /catalog
-// router.get("/", (req, res) => {
-//   res.redirect("/catalog");
-// });
+router.get("/", homeController.index);
 
 module.exports = router;

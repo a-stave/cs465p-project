@@ -5,8 +5,6 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const catalogRouter = require("./routes/catalog"); // Remove?
 const cardRouter = require("./routes/cards");
 const deckRouter = require("./routes/decks");
 const mcqRouter = require("./routes/multipleChoice");
@@ -24,10 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-
-// Catalog home (like MDN)
-// app.use("/catalog", catalogRouter); // Remove?
 
 // Flashcards
 app.use("/cards", cardRouter);

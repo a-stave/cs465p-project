@@ -1,6 +1,4 @@
-const Card = require("../models/card");
-const Deck = require("../models/deck");
-const MultipleChoice = require("../models/multipleChoice");
+const { Card, Deck, MultipleChoice } = require("../models");
 
 exports.index = async (req, res, next) => {
   try {

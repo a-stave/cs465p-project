@@ -1,6 +1,4 @@
-const Deck = require("../models/deck");
-const Card = require("../models/card");
-const MultipleChoice = require("../models/multipleChoice");
+const { Card, Deck, MultipleChoice } = require("../models");
 const { body, validationResult } = require("express-validator");
 
 // Display list of all Decks.
