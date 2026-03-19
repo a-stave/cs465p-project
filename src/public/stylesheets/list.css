@@ -1,0 +1,131 @@
+/* This file contains styles for the various `..._list.pug` pages, from which users view, modify, and delete
+ * decks, flashcards, and multiple-choice questions (MCQs).
+ *
+ * A wireframe can be found in the README. To recap: A large card-shaped collapsible list floats in the center
+ * of the main content space. Text is left-aligned, and management buttons (Play, Edit, Delete) are right-
+ * aligned. Each item is a <summary><detail> pair with the question or deck title as the summary and the
+ * answer(s) or description as the detail. Several items can be expanded at once and are highlighted using
+ * the theme's accent color upon doing so.
+ */
+
+/* Outer container: centered column */
+.list-container {
+  width: min(var(--content-max-width), 95%);
+  margin: 2rem auto;
+}
+
+/* Single large rounded rectangle for the entire list */
+.collapsible-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  box-shadow: var(--shadow-soft);
+  border: 1px solid light-dark(var(--border-light), var(--border-dark));
+}
+
+/* Each row wraps a <details> element */
+.list-row + .list-row {
+  border-top: 1px solid light-dark(var(--border-light), var(--border-dark));
+}
+
+/* Summary row: clickable header */
+.collapsible-list summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.9rem 1.1rem;
+  cursor: pointer;
+  list-style: none;
+
+  background-color: light-dark(
+    var(--surface-muted-light),
+    var(--surface-muted-dark)
+  );
+  color: light-dark(var(--text-light), var(--text-dark));
+}
+
+.collapsible-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.collapsible-list summary:hover {
+  background-color: light-dark(#e0e0e0, #2f3b4f);
+}
+
+/* Title text inside summary */
+.item-title {
+  font-weight: 600;
+  color: light-dark(var(--text-light), var(--text-dark));
+}
+
+/* Action icons container */
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Icon buttons (Bootstrap Icons recommended) */
+.icon-btn {
+  text-decoration: none;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  color: light-dark(var(--text-muted-light), var(--text-muted-dark));
+}
+
+.icon-btn:hover {
+  opacity: 1;
+}
+
+/* Play: primary action */
+.icon-btn.play {
+  color: light-dark(var(--accent-light), var(--accent-dark));
+  font-weight: 600;
+}
+
+/* Delete: destructive */
+.icon-btn.delete {
+  color: #cf222e;
+}
+
+/* Detail body: hidden by default */
+.item-body {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1.1rem;
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  transition: max-height 0.25s ease;
+}
+
+/* Text inside detail body */
+.item-body p {
+  margin: 0.75rem 0 1rem;
+  font-size: 0.95rem;
+  color: light-dark(var(--text-muted-light), var(--text-muted-dark));
+}
+
+/* When details is open: accent summary + expanded body */
+details[open] summary {
+  background-color: light-dark(var(--accent-light), var(--accent-dark));
+  color: #ffffff;
+}
+
+details[open] .item-title {
+  color: #ffffff;
+}
+
+details[open] .item-body {
+  max-height: 200px;
+}
+
+/* MCQ options inside detail body */
+.item-body ul {
+  margin: 0.75rem 0 1rem;
+  padding-left: 1.25rem;
+}

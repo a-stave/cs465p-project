@@ -1,47 +1,22 @@
-// const Author = require("./author");
-// const Book = require("./book");
-// const Genre = require("./genre");
-// const BookInstance = require("./bookinstance");
+const { sequelize } = require("../config/database");
 
-// // Book -> Author (many-to-one)
-// Book.belongsTo(Author, { foreignKey: { allowNull: false } });
-// Author.hasMany(Book);
-
-// // Book -> Genre (many-to-many)
-// Book.belongsToMany(Genre, { through: "BookGenres" });
-// Genre.belongsToMany(Book, { through: "BookGenres" });
-
-// // BookInstance -> Book (many-to-one)
-// BookInstance.belongsTo(Book, { foreignKey: { allowNull: false } });
-// Book.hasMany(BookInstance);
-
-// module.exports = { Author, Book, Genre, BookInstance };
-
-const { sequelize } = require("../db");
-
-const Author = require("./author");
-const Book = require("./book");
-const Genre = require("./genre");
-const BookInstance = require("./bookinstance");
+const Deck = require("./Deck");
+const Card = require("./Card");
+const MultipleChoice = require("./MultipleChoice");
 
 // --- ASSOCIATIONS ---
 
-// Book → Author (many books belong to one author)
-Book.belongsTo(Author, { foreignKey: { allowNull: false } });
-Author.hasMany(Book);
+// Deck <-> Card
+Deck.belongsToMany(Card, { through: "DeckCards" });
+Card.belongsToMany(Deck, { through: "DeckCards" });
 
-// Book → Genre (many-to-many)
-Book.belongsToMany(Genre, { through: "BookGenres" });
-Genre.belongsToMany(Book, { through: "BookGenres" });
-
-// BookInstance → Book (many instances belong to one book)
-BookInstance.belongsTo(Book, { foreignKey: { allowNull: false } });
-Book.hasMany(BookInstance);
+// Deck <-> MultipleChoice
+Deck.belongsToMany(MultipleChoice, { through: "DeckMultipleChoices" });
+MultipleChoice.belongsToMany(Deck, { through: "DeckMultipleChoices" });
 
 module.exports = {
   sequelize,
-  Author,
-  Book,
-  Genre,
-  BookInstance,
+  Deck,
+  Card,
+  MultipleChoice,
 };

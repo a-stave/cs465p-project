@@ -1,0 +1,59 @@
+extends ../layout
+
+block content
+  section.page-container.form-panel
+    h1= title
+
+    form(method='POST')
+      div.form-group
+        label(for='question') Question:
+        input#question.form-control(
+          type='text'
+          name='question'
+          required
+          value=(mcq ? mcq.question : '')
+        )
+
+      div.form-group
+        label(for='options') Options (one per line):
+        textarea#options.form-control(
+          name='options'
+          required
+        )= mcq ? mcq.options.join('\n') : ''
+
+      div.form-group
+        label(for='correctAnswer') Correct Answer:
+        input#correctAnswer.form-control(
+          type='text'
+          name='correctAnswer'
+          required
+          value=(mcq ? mcq.correctAnswer : '')
+        )
+
+      div.form-group
+        label(for='imageUrl') Image URL (optional):
+        input#imageUrl.form-control(
+          type='text'
+          name='imageUrl'
+          value=(mcq ? mcq.imageUrl : '')
+        )
+
+      if decks.length
+        h3 Decks
+        each deck in decks
+          div.form-check
+            input.form-check-input(
+              type='checkbox'
+              id='deck-' + deck.id
+              name='decks'
+              value=deck.id
+              checked=deck.checked
+            )
+            label.form-check-label(for='deck-' + deck.id)= deck.name
+
+      button.btn.btn-primary(type='submit', style='margin-top:10px;') Submit
+
+    if errors
+      ul
+        each error in errors
+          li= error.msg

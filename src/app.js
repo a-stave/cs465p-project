@@ -5,8 +5,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const catalogRouter = require("./routes/catalog"); // Import routes for "catalog" area of site
+const cardRouter = require("./routes/cards");
+const deckRouter = require("./routes/decks");
+const mcqRouter = require("./routes/multipleChoice");
 
 const app = express();
 
@@ -21,8 +22,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/catalog", catalogRouter); // Add catalog routes to middleware chain.
+
+// Flashcards
+app.use("/cards", cardRouter);
+
+// Decks
+app.use("/decks", deckRouter);
+
+// Multiple-choice questions
+app.use("/multiple-choice", mcqRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -31,13 +39,13 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render("error");
 });
 
 module.exports = app;
+
+console.log("Server running at http://localhost:3000/");

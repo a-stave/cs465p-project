@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h1 Delete Multiple Choice Question: #{mcq.question}
+
+  if error
+    p(style="color:red")= error
+
+  if decks.length
+    p
+      strong This question cannot be deleted because it belongs to the following decks:
+    ul
+      each deck in decks
+        li
+          a(href=deck.url)= deck.name
+  else
+    p Are you sure you want to delete this question?
+
+    form(method='POST')
+      input(type='hidden', name='mcqid', value=mcq.id)
+      button.btn.btn-danger(type='submit') Delete

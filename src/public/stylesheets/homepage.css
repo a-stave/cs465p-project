@@ -1,0 +1,80 @@
+/* This file contains styles for the `index.pug` homepage, which prompts users to create a new deck.
+ *
+ * A wireframe can be found in the README. To recap: The screen is dominated by a central "hero" component,
+ * an animated typewriter which cycles through various topics the user might wish to learn. The animation
+ * appears as though it's being typed in real time. The text may wrap; if so, the topmost line remains static
+ * and the text grows downwards towards the foot of the page. The "Start" button which directs users towards
+ * creating a deck floats in front of the typewriter text. (Credit to CSS-tricks for the code!)
+ */
+
+#home {
+  position: relative;
+  width: 100%;
+  padding-top: 20vh; /* distance from navbar to prompt */
+  padding-bottom: 20vh; /* ensures prompt never collides with footer */
+}
+
+/* Prompt grows downward naturally */
+.prompt {
+  position: relative;
+  width: min(90%, 28rem);
+  margin: 0 auto; /* center horizontally */
+  line-height: 1.4;
+  text-align: left;
+  overflow: visible; /* Lets it grow downward */
+}
+
+.prompt::after {
+  display: none;
+}
+
+/* Static text styling */
+.prompt-static {
+  font-weight: 600;
+  color: light-dark(var(--text-light), var(--text-dark));
+  opacity: 0.9;
+}
+
+/* Typewriter text */
+.typewrite > .wrap {
+  color: light-dark(var(--text-muted-light), var(--text-muted-dark));
+  font-weight: 500;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Start button stays fixed in viewport */
+#home-start-button {
+  position: fixed;
+  bottom: 12vh;
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: 0.75rem 2.5rem;
+  border-radius: 999px;
+  border: none;
+
+  background-color: light-dark(var(--accent-light), var(--accent-dark));
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+
+  box-shadow: var(--shadow-soft);
+  z-index: 10;
+}
+
+#home-start-button:hover {
+  filter: brightness(1.05);
+}
+
+/* Typewriter cursor */
+.cursor-solid,
+.cursor-blink {
+  border-right: 2px solid
+    light-dark(var(--text-muted-light), var(--text-muted-dark));
+}
+
+.cursor-blink {
+  animation: blink 0.8s steps(1) infinite;
+}

@@ -1,0 +1,39 @@
+nav.navbar.site-header.navbar-dark.navbar-expand-xl.p-2
+  a.navbar-brand(href='/') Home
+
+  button.navbar-toggler(
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#mobileMenu"
+    aria-controls="mobileMenu"
+  )
+    span.navbar-toggler-icon
+
+  #navbarNav.d-none.d-xl-flex
+    ul.navbar-nav.me-auto
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(
+          href="#"
+          data-bs-toggle="dropdown"
+        ) Decks
+        ul.dropdown-menu
+          li: a.dropdown-item(href="/decks") All Decks
+          li: a.dropdown-item(href="/decks/create") Create a Deck
+
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(
+          href="#"
+          data-bs-toggle="dropdown"
+        ) Flashcards
+        ul.dropdown-menu
+          li: a.dropdown-item(href="/cards") All Flashcards
+          li: a.dropdown-item(href="/cards/create") Create a Flashcard
+
+      li.nav-item.dropdown
+        a.nav-link.dropdown-toggle(
+          href="#"
+          data-bs-toggle="dropdown"
+        ) Multiple Choice
+        ul.dropdown-menu
+          li: a.dropdown-item(href="/multiple-choice") All Multiple Choice
+          li: a.dropdown-item(href="/multiple-choice/create") Create

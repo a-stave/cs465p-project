@@ -1,0 +1,37 @@
+mixin collapsibleList(items, baseRoute, type)
+  ul.collapsible-list
+    each item in items
+      li.list-row
+        details
+          summary
+            span.item-title
+              if type === 'deck'
+                = item.name
+              else
+                = item.question
+            
+            //- Bootstrap has a lot of cool icons if you want to experiment
+            span.item-actions
+              if type === 'deck'
+                a.icon-btn.play(href=`/${baseRoute}/${item.id}/play`, aria-label="Play")
+                  i.bi.bi-collection-play
+
+              a.icon-btn(href=`/${baseRoute}/${item.id}/update`, aria-label="Edit")
+                i.bi.bi-pencil-square
+
+              a.icon-btn.delete(href=`/${baseRoute}/${item.id}/delete`, aria-label="Delete")
+                i.bi.bi-x-square
+
+          .item-body
+            if type === 'deck'
+              p= item.description || 'No description'
+            else if type === 'card'
+              p.answer= item.answer
+            else if type === 'mcq'
+              ul
+                each option in item.options
+                  if option === item.correctAnswer
+                    li
+                      b= option
+                  else
+                    li= option

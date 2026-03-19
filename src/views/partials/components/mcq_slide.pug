@@ -1,0 +1,12 @@
+mixin mcqSlide(mcq, activeClass)
+  .carousel-item(class=activeClass)
+    .mcq-card
+      if mcq.imageUrl
+        .mcq-image-wrapper
+          img(src=mcq.imageUrl, alt='Related image')
+      p.mcq-question= mcq.question
+      ul.mcq-options(data-correct=mcq.correctAnswer)
+        each option in mcq.options
+          li.mcq-option
+            input(type="radio", name=`mcq-${mcq.id}`, value=option)
+            span= option

@@ -1,0 +1,225 @@
+/* This file contains styles for the `deck_play.pug` page and its related components, from which users
+ * can play a deck of flashcards or multiple-choice questions (MCQs).
+ *
+ * A wireframe can be found in the README. To recap: A Bootstrap carousel occupies the main content space.
+ * The carousel is populated with interactive cards. Flashcards flip to show the answer when tapped. MCQs
+ * present a list of radio buttons; the correct answer is highlighted green, and incorrect answers red.
+ */
+
+.play-deck {
+  width: min(var(--content-max-width), 95%);
+  margin: 2rem auto;
+  text-align: center;
+}
+
+/* Deck title & description */
+.play-deck h1 {
+  text-align: center;
+}
+
+.play-deck p {
+  color: light-dark(var(--text-muted-light), var(--text-muted-dark));
+}
+
+/* Carousel container */
+#deckCarousel {
+  margin-top: 2rem;
+}
+
+/* Carousel controls */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Flashcards and MCQ share styling to create a cohesive look */
+.study-card,
+.mcq-card,
+.flip-card {
+  max-width: 24rem; /* narrower for breathing room */
+  width: 100%;
+  min-height: 20rem;
+
+  background-color: #ffffff; /* always white */
+  color: #222222; /* always dark text */
+
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1.75rem 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Flashcard flip styling */
+.flip-card {
+  position: relative;
+  perspective: 1000px;
+  cursor: pointer;
+  pointer-events: auto; /* ensure clicks reach the card */
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+
+  backface-visibility: hidden;
+
+  background-color: #ffffff;
+  color: #222222;
+
+  padding: 1.75rem 1.5rem;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Question/answer text */
+.card-question,
+.card-answer {
+  font-size: 1.05rem;
+}
+
+/* MCQ card styling */
+.mcq-card {
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto; /* ensure clicks reach options */
+}
+
+/* Image region */
+.mcq-image-wrapper {
+  width: 100%;
+  max-height: 40%;
+  margin-bottom: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mcq-image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+/* Question text */
+.mcq-question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Options list */
+.mcq-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: auto; /* push options downward */
+}
+
+.mcq-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.4rem;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+/* Radio input */
+.mcq-option input[type="radio"] {
+  margin: 0;
+}
+
+/* Option text */
+.mcq-option span {
+  font-size: 0.98rem;
+}
+
+/* Hover */
+.mcq-option:hover {
+  background-color: light-dark(#f2f2f2, #e0e0e0);
+}
+
+/* Correct / incorrect states */
+.mcq-option.correct {
+  color: #155724;
+  background-color: #e6ffe6;
+  border-color: #b2e2b2;
+}
+
+.mcq-option.incorrect {
+  color: #8b0000;
+  background-color: #ffe6e6;
+  border-color: #f5b5b5;
+}
+
+/* Reveal correct answer without background */
+.mcq-option.correct-reveal {
+  color: #155724;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* Disable Bootstrap's slide stacking and transforms */
+.carousel-inner {
+  overflow: hidden; /* Should keep offscreen slide from lurking behind focus card */
+}
+
+/* Base slide behavior: NO transforms, NO stacking */
+.carousel-item {
+  position: static !important;
+  transform: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none; /* Prevent carousel from intercepting clicks */
+}
+
+/* Hide Bootstrap's "next" and "prev" slides completely */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item-start,
+.carousel-item-end {
+  position: static !important;
+  transform: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Only the active slide should receive clicks */
+.carousel-item.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

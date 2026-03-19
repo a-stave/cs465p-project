@@ -1,0 +1,83 @@
+/* This file contains styles for the various `..._form.pug` pages, from which users create decks, flashcards,
+ * and multiple-choice questions (MCQs).
+ *
+ * The appropriate fields are arranged within a form that floats in the center of the main content space.
+ * Text and fields are left-aligned, and are scrollable rather than resizable. Beneath the fields is a list
+ * of items that can be assigned to it: Flashcards/MCQs may belong to multiple decks, and decks may consist
+ * of multiple flashcards/MCQs.
+ */
+
+/* Forms are held in a card-like container that echoes the flashcards they represent. */
+.form-panel {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1.75rem 1.5rem;
+}
+
+/* Controls are rounded and themed to match the homepage */
+.form-control {
+  border-radius: var(--radius-md);
+  border: 1px solid light-dark(var(--border-light), var(--border-dark));
+  background-color: light-dark(#ffffff, var(--surface-muted-dark));
+  color: light-dark(var(--text-light), var(--text-dark));
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: light-dark(var(--accent-light), var(--accent-dark));
+  box-shadow: 0 0 0 0.15rem
+    light-dark(rgba(255, 74, 42, 0.25), rgba(0, 187, 255, 0.25));
+}
+
+/* Form fields spacing */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+/* Text area is scrollable, not the default resizable */
+textarea.form-control {
+  resize: none;
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+/* Checkbox groups (cards, mcqs, decks) */
+.form-check {
+  margin-bottom: 0.35rem;
+}
+
+.form-check-label {
+  font-size: 0.95rem;
+}
+
+/* Primary submit button matches homepage */
+.btn-primary {
+  border-radius: 999px;
+  border: none;
+  padding: 0.6rem 1.8rem;
+  font-weight: 700;
+  background-color: light-dark(var(--accent-light), var(--accent-dark));
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+/* Error list: styled alert */
+form + ul {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  list-style: none;
+  border-radius: var(--radius-md);
+  background-color: light-dark(#ffe6e6, #4a1f1f);
+  color: light-dark(#8b0000, #ffd6d6);
+}

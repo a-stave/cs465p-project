@@ -1,14 +1,115 @@
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* This file contains global styles, especially for `layout.pug`, and animations.
+ *
+ * The app features a grayscale light-theme with red accents, or a muted blue dark-theme with electric
+ * blue accents. Corners are rounded and text is generally large since most screens feature only modest
+ * amounts of text. Content is centered on the screen and may introduce significant margins on large media
+ * devices.
+ */
+
+* {
+  box-sizing: border-box;
 }
 
-a {
-  color: #00B7FF;
-} */
+:root {
+  color-scheme: light dark;
 
-.sidebar-nav {
-  margin-top: 20px;
-  padding: 0;
-  list-style: none;
+  /* Light theme */
+  --header-light: #333333;
+  --header-text-light: #f5f5f5;
+  --background-light: #f5f5f5; /* page background */
+  --surface-light: #ffffff; /* cards, panels, lists */
+  --surface-muted-light: #e6e6e6;
+  --text-light: #222222;
+  --text-muted-light: #555555;
+  --border-light: #d0d7de;
+  --accent-light: #ff4a2a; /* orangish-red */
+
+  /* Dark theme */
+  --header-dark: #171d25;
+  --header-text-dark: #f5f5f5;
+  --background-dark: #212e42;
+  --surface-dark: #1b2636;
+  --surface-muted-dark: #2a3648;
+  --text-dark: #f5f5f5;
+  --text-muted-dark: #c0c7d4;
+  --border-dark: #3a4658;
+  --accent-dark: #00bbff; /* electric blue */
+
+  --header-height: 3.5rem;
+  --footer-height: 3rem;
+
+  --content-max-width: 900px;
+  --radius-lg: 1rem;
+  --radius-md: 0.5rem;
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.18);
+  --shadow-subtle: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+html {
+  font:
+    1.6rem/1.4 Verdana,
+    Arial,
+    sans-serif;
+  scroll-behavior: smooth;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: light-dark(var(--background-light), var(--background-dark));
+  color: light-dark(var(--text-light), var(--text-dark));
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content grows between sticky header and footer */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Generic centered column container */
+.page-container {
+  width: min(var(--content-max-width), 95%);
+  margin: 2rem auto;
+}
+
+/* Headings: consistent style across pages */
+h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem;
+}
+
+/* Animations and utilities */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* TODO: Debug carousel */
+#deckCarousel .carousel-item {
+  outline: 50px solid red !important;
+}
+
+#deckCarousel .carousel-item.active {
+  outline: 50px lime !important;
+}
+
+#deckCarousel .carousel-item {
+  display: none; /* custom slider controls visibility */
+  position: static !important;
+  transform: none !important;
 }

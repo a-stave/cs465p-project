@@ -1,16 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #[em LocalLibrary], a very basic Express website developed as a tutorial example on the Mozilla Developer Network.
+  #home
+    .prompt
+      span.prompt-line
+        span.prompt-static I want to learn about
+        span.typewrite(
+          data-period="4000"
+          data-type='["Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ea quasi sed recusandae praesentium, et fugit delectus aliquam nam reiciendis libero neque, vero, qui voluptates ad eveniet magni veritatis eligendi.", "countries of the world", "U.S. state capitals", "the periodic table", "famous painters", "computer science terms"]'
+        ) 
+          span.wrap
 
-  h2 Dynamic content
-
-  p The library has the following record counts:
-
-  ul
-    li #[strong Books:] !{book_count}
-    li #[strong Copies:] !{book_instance_count}
-    li #[strong Copies available:] !{book_instance_available_count}
-    li #[strong Authors:] !{author_count}
-    li #[strong Genres:] !{genre_count}
+    a#home-start-button(href='/decks/create') Start
