@@ -1,43 +1,44 @@
 extends ../layout 
 
 block content 
-  h1= title 
+  section.page-container.form-panel
+    h1= title 
 
-  form(method='POST')
-    div.form-group
-      label(for='question') Question:
-      input#question.form-control(
-        type='text'
-        name='question'
-        required
-        value=(card ? card.question : '')
-      )
-
-    div.form-group
-      label(for='answer') Answer:
-      textarea#answer.form-control(
-        name='answer'
-        required
-      )= card ? card.answer : ''
-
-    if decks && decks.length
+    form(method='POST')
       div.form-group
-        label Decks:
-        div
-          each deck in decks
-            div.form-check
-              input.form-check-input(
-                type='checkbox'
-                id='deck-' + deck.id
-                name='decks'
-                value=deck.id
-                checked=deck.checked
-              )
-              label.form-check-label(for='deck-' + deck.id)= deck.name
+        label(for='question') Question:
+        input#question.form-control(
+          type='text'
+          name='question'
+          required
+          value=(card ? card.question : '')
+        )
 
-    button.btn.btn-primary(type='submit', style='margin-top: 10px;') Submit
+      div.form-group
+        label(for='answer') Answer:
+        textarea#answer.form-control(
+          name='answer'
+          required
+        )= card ? card.answer : ''
 
-  if errors
-    ul
-      each error in errors
-        li= error.msg
+      if decks && decks.length
+        div.form-group
+          label Decks:
+          div
+            each deck in decks
+              div.form-check
+                input.form-check-input(
+                  type='checkbox'
+                  id='deck-' + deck.id
+                  name='decks'
+                  value=deck.id
+                  checked=deck.checked
+                )
+                label.form-check-label(for='deck-' + deck.id)= deck.name
+
+      button.btn.btn-primary(type='submit', style='margin-top: 10px;') Submit
+
+    if errors
+      ul
+        each error in errors
+          li= error.msg

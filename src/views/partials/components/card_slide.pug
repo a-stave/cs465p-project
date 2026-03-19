@@ -1,11 +1,8 @@
 mixin cardSlide(card, activeClass)
   .carousel-item(class=activeClass)
-    .d-flex.justify-content-center.align-items-center(style="min-height: 60vh;")
-      .flip-card.shadow-lg(style="max-width: 28rem; width: 100%; cursor: pointer;")
-        .flip-card-inner
-          .flip-card-front.text-center
-            h5.card-title.mb-3 Question
-            p.card-question.fs-5.mb-4= card.question
-          .flip-card-back.text-center
-            h5.card-title.mb-3 Answer
-            p.card-answer.fs-5= card.answer
+    .flip-card.study-card
+      .flip-card-inner
+        .flip-card-front
+          p.card-question= card.question
+        .flip-card-back
+          p.card-answer= card.answer

@@ -1,12 +1,12 @@
 mixin mcqSlide(mcq, activeClass)
   .carousel-item(class=activeClass)
-    .d-flex.justify-content-center.align-items-center(style="min-height: 60vh;")
-      .card.shadow-lg.text-center.p-4(style="max-width: 28rem; width: 100%;")
-        h5.card-title.mb-3 Question
-        p.card-question.fs-5.mb-4= mcq.question
-        hr
-        ul.list-group.list-group-flush.text-start
-          each option in mcq.options
-            li.list-group-item(class= option === mcq.correctAnswer ? 'fw-bold text-success' : '')= option
-        if mcq.imageUrl
-          img.mt-3(src=mcq.imageUrl, alt='Related image', style='max-width:100%; height:auto; border-radius:0.25rem;')
+    .mcq-card
+      if mcq.imageUrl
+        .mcq-image-wrapper
+          img(src=mcq.imageUrl, alt='Related image')
+      p.mcq-question= mcq.question
+      ul.mcq-options(data-correct=mcq.correctAnswer)
+        each option in mcq.options
+          li.mcq-option
+            input(type="radio", name=`mcq-${mcq.id}`, value=option)
+            span= option

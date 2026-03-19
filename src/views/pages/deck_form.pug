@@ -1,53 +1,54 @@
 extends ../layout
 
 block content
-  h1= title
+  section.page-container.form-panel
+    h1= title
 
-  form(method='POST')
-    div.form-group
-      label(for='name') Name:
-      input#name.form-control(
-        type='text'
-        name='name'
-        required
-        value=(deck ? deck.name : '')
-      )
+    form(method='POST')
+      div.form-group
+        label(for='name') Name:
+        input#name.form-control(
+          type='text'
+          name='name'
+          required
+          value=(deck ? deck.name : '')
+        )
 
-    div.form-group
-      label(for='description') Description:
-      textarea#description.form-control(
-        name='description'
-      )= deck ? deck.description : ''
+      div.form-group
+        label(for='description') Description:
+        textarea#description.form-control(
+          name='description'
+        )= deck ? deck.description : ''
 
-    if cards.length
-      h3 Cards
-      each card in cards
-        div.form-check
-          input.form-check-input(
-            type='checkbox'
-            id='card-' + card.id
-            name='cards'
-            value=card.id
-            checked=card.checked
-          )
-          label.form-check-label(for='card-' + card.id)= card.question
+      if cards.length
+        h3 Cards
+        each card in cards
+          div.form-check
+            input.form-check-input(
+              type='checkbox'
+              id='card-' + card.id
+              name='cards'
+              value=card.id
+              checked=card.checked
+            )
+            label.form-check-label(for='card-' + card.id)= card.question
 
-    if mcqs.length
-      h3 Multiple Choice Questions
-      each mcq in mcqs
-        div.form-check
-          input.form-check-input(
-            type='checkbox'
-            id='mcq-' + mcq.id
-            name='mcqs'
-            value=mcq.id
-            checked=mcq.checked
-          )
-          label.form-check-label(for='mcq-' + mcq.id)= mcq.question
+      if mcqs.length
+        h3 Multiple Choice Questions
+        each mcq in mcqs
+          div.form-check
+            input.form-check-input(
+              type='checkbox'
+              id='mcq-' + mcq.id
+              name='mcqs'
+              value=mcq.id
+              checked=mcq.checked
+            )
+            label.form-check-label(for='mcq-' + mcq.id)= mcq.question
 
-    button.btn.btn-primary(type='submit', style='margin-top: 10px;') Submit
+      button.btn.btn-primary(type='submit', style='margin-top: 10px;') Submit
 
-  if errors
-    ul
-      each error in errors
-        li= error.msg
+    if errors
+      ul
+        each error in errors
+          li= error.msg

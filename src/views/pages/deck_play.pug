@@ -8,12 +8,12 @@ block content
     if deck.description
       p.mb-4= deck.description
 
-    #deckCarousel.carousel.slide(data-bs-ride="carousel")
+    #deckCarousel.carousel.slide(data-bs-interval="false" data-bs-ride="false")
       .carousel-inner
         if deck.cards && deck.cards.length
           each card, i in deck.cards
             +cardSlide(card, i === 0 ? 'active' : '')
-        else if deck.multipleChoices && deck.multipleChoices.length
+        if deck.multipleChoices && deck.multipleChoices.length
           each mcq, i in deck.multipleChoices
             +mcqSlide(mcq, i === 0 ? 'active' : '')
 

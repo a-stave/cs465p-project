@@ -2,6 +2,6 @@ extends ../layout
 include ../partials/components/collapsible_list.pug
 
 block content
-  section.list-container
+  section.list-container.page-container
     h1= title
     +collapsibleList(mcq_list, "multiple-choice", "mcq")
