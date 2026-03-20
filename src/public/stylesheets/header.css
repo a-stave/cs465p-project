@@ -36,7 +36,7 @@
 
 .site-header .nav-link:hover,
 .site-header .navbar-brand:hover {
-  color: light-dark(#ffffff, #ffffff);
+  color: #ffffff;
 }
 
 /* Dropdown menus themed */
@@ -56,7 +56,7 @@
   );
 }
 
-/* Footer: present in layout always, but visually hidden on small screens */
+/* Footer: present in all but small screens */
 .site-footer {
   background-color: light-dark(var(--header-light), var(--header-dark));
   color: light-dark(var(--header-text-dark), var(--header-text-light));
@@ -64,16 +64,10 @@
   height: var(--footer-height);
 }
 
-/* On small screens, keep height but hide visually to avoid layout shift */
+/* On small screens footer is hidden and header adopts background theme, inverting text */
 @media (max-width: 575.98px) {
   .site-footer {
-    background-color: transparent;
-    color: transparent;
-    pointer-events: none;
-  }
-
-  .site-footer a {
-    color: transparent;
+    display: none;
   }
 
   .site-header {
@@ -82,5 +76,16 @@
       var(--background-light),
       var(--background-dark)
     );
+  }
+
+  .site-header > .navbar-brand {
+    color: light-dark(var(--text-light), var(--header-text-dark));
+  }
+}
+
+/* Same issue as in cs 463, light theme is washed out and must be changed manually */
+@media (max-width: 575.98px) and (prefers-color-scheme: light) {
+  .navbar-toggler {
+    filter: invert(1);
   }
 }

@@ -36,7 +36,8 @@ block content
                 )
                 label.form-check-label(for='deck-' + deck.id)= deck.name
 
-      button.btn.btn-primary(type='submit', style='margin-top: 10px;') Submit
+      div.form-actions
+        button#submit-button(type='submit') Submit
 
     if errors
       ul

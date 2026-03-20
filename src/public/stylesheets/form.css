@@ -59,7 +59,12 @@ textarea.form-control {
 }
 
 /* Primary submit button matches homepage */
-.btn-primary {
+.form-actions {
+  text-align: center;
+  margin-top: 1.8rem;
+}
+
+#submit-button {
   border-radius: 999px;
   border: none;
   padding: 0.6rem 1.8rem;
@@ -68,8 +73,9 @@ textarea.form-control {
   box-shadow: var(--shadow-soft);
 }
 
-.btn-primary:hover {
-  filter: brightness(1.05);
+#submit-button:hover {
+  filter: brightness(1.1);
+  transform: scale(1.03);
 }
 
 /* Error list: styled alert */

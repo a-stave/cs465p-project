@@ -25,7 +25,7 @@
 }
 
 .prompt::after {
-  display: none;
+  /* display: none; */
 }
 
 /* Static text styling */
@@ -46,7 +46,7 @@
 /* Start button stays fixed in viewport */
 #home-start-button {
   position: fixed;
-  bottom: 12vh;
+  bottom: 16vh;
   left: 50%;
   transform: translateX(-50%);
 
@@ -65,7 +65,8 @@
 }
 
 #home-start-button:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.1);
+  transform: translateX(-50%) scale(1.03);
 }
 
 /* Typewriter cursor */
