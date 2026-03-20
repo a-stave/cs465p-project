@@ -10,7 +10,7 @@ mixin collapsibleList(items, baseRoute, type)
               else
                 = item.question
             
-            //- Bootstrap has a lot of cool icons if you want to experiment
+            //- Bootstrap has a lot of cool icons to experiment with
             span.item-actions
               if type === 'deck'
                 a.icon-btn.play(href=`/${baseRoute}/${item.id}/play`, aria-label="Play")
@@ -19,7 +19,13 @@ mixin collapsibleList(items, baseRoute, type)
               a.icon-btn(href=`/${baseRoute}/${item.id}/update`, aria-label="Edit")
                 i.bi.bi-pencil-square
 
-              a.icon-btn.delete(href=`/${baseRoute}/${item.id}/delete`, aria-label="Delete")
+              button.icon-btn.delete(
+                type="button"
+                data-id=item.id
+                data-type=type 
+                data-route=baseRoute 
+                onclick="openDeleteModal(this)"
+              )
                 i.bi.bi-x-square
 
           .item-body
@@ -35,3 +41,11 @@ mixin collapsibleList(items, baseRoute, type)
                       b= option
                   else
                     li= option
+
+    li.list-row.add-new 
+      a.add-new-link(href=`/${baseRoute}/create`)
+        i.bi.bi-plus-circle 
+        span Add #{type.charAt(0).toUpperCase() + type.slice(1)}
+
+  //- Include the delete modal once per list
+  include delete_modal

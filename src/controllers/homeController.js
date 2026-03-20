@@ -9,7 +9,7 @@ exports.index = async (req, res, next) => {
     ]);
 
     res.render("index", {
-      title: "Flashcard App Home",
+      title: "Cram.io",
       card_count,
       deck_count,
       mcq_count,

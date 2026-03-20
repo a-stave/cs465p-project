@@ -23,3 +23,7 @@ block content
       button.slider-control.slider-next(type="button")
         i.bi.bi-chevron-right 
         span.visually-hidden Next
+
+//- The Play script breaks other pages if included in scripts.pug, put here instead
+block scripts 
+  script(src="/javascripts/quiz.js")

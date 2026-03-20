@@ -2,6 +2,9 @@ extends ../layout
 
 block content
   section.page-container.form-panel
+    a.back-link(href=backUrl)
+      i.bi.bi-chevron-left  Back to All Decks
+
     h1= title
 
     form(method='POST')

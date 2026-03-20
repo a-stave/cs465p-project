@@ -1,0 +1,12 @@
+//- Delete Confirmation Modal (Bootstrap)
+div#deleteModal.modal.fade(tabindex="-1" aria-hidden="true")
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        h5.modal-title Delete Item
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+      div.modal-body
+        p Are you sure you want to delete this item?
+      div.modal-footer
+        button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Cancel
+        button#confirmDeleteBtn.btn.btn-danger(type="button") Delete

@@ -18,27 +18,8 @@ exports.deck_list = async (req, res, next) => {
 };
 
 // Display detail page for a specific Deck.
-exports.deck_detail = async (req, res, next) => {
-  try {
-    const deck = await Deck.findByPk(req.params.id, {
-      include: [Card, MultipleChoice],
-    });
-
-    if (!deck) {
-      const err = new Error("Deck not found");
-      err.status = 404;
-      return next(err);
-    }
-
-    res.render("pages/deck_detail", {
-      title: deck.name,
-      deck,
-      cards: deck.Cards,
-      mcqs: deck.MultipleChoices,
-    });
-  } catch (err) {
-    next(err);
-  }
+exports.deck_detail = (req, res) => {
+  res.redirect(`/decks/${req.params.id}/update`);
 };
 
 // Display Deck create form on GET.
@@ -51,6 +32,7 @@ exports.deck_create_get = async (req, res, next) => {
 
     res.render("pages/deck_form", {
       title: "Create Deck",
+      backUrl: "/decks",
       cards: allCards,
       mcqs: allMCQs,
     });
@@ -107,63 +89,29 @@ exports.deck_create_post = [
       await deck.setCards(cardIds);
       await deck.setMultipleChoices(mcqIds);
 
-      res.redirect(deck.url);
+      res.redirect("/decks");
     } catch (err) {
       next(err);
     }
   },
 ];
 
-// Display Deck delete form on GET.
-exports.deck_delete_get = async (req, res, next) => {
-  try {
-    const deck = await Deck.findByPk(req.params.id, {
-      include: [Card, MultipleChoice],
-    });
-
-    if (!deck) {
-      const err = new Error("Deck not found");
-      err.status = 404;
-      return next(err);
-    }
-
-    res.render("pages/deck_delete", {
-      title: "Delete Deck",
-      deck,
-      cards: deck.Cards,
-      mcqs: deck.MultipleChoices,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-// Handle Deck delete on POST.
+// Handle Deck delete via API on POST.
 exports.deck_delete_post = async (req, res, next) => {
   try {
-    const deck = await Deck.findByPk(req.body.deckid, {
+    const deckId = req.params.id || req.body.deckid;
+
+    const deck = await Deck.findByPk(deckId, {
       include: [Card, MultipleChoice],
     });
 
     if (!deck) {
-      const err = new Error("Deck not found");
-      err.status = 404;
-      return next(err);
-    }
-
-    if (deck.Cards.length > 0 || deck.MultipleChoices.length > 0) {
-      return res.render("pages/deck_delete", {
-        title: "Delete Deck",
-        deck,
-        cards: deck.Cards,
-        mcqs: deck.MultipleChoices,
-        error:
-          "Remove all cards and multiple-choice questions before deleting this deck.",
-      });
+      return res.status(404).json({ error: "Deck not found" });
     }
 
     await deck.destroy();
-    res.redirect("/decks");
+
+    return res.json({ success: true });
   } catch (err) {
     next(err);
   }
@@ -192,6 +140,7 @@ exports.deck_update_get = async (req, res, next) => {
 
     res.render("pages/deck_form", {
       title: "Update Deck",
+      backUrl: "/decks",
       deck,
       cards: allCards,
       mcqs: allMCQs,
@@ -252,7 +201,7 @@ exports.deck_update_post = [
       await deck.setCards(cardIds);
       await deck.setMultipleChoices(mcqIds);
 
-      res.redirect(deck.url);
+      res.redirect("/decks");
     } catch (err) {
       next(err);
     }

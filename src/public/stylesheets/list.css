@@ -77,6 +77,12 @@
   font-size: 0.95rem;
   opacity: 0.8;
   color: light-dark(var(--text-light), var(--text-dark));
+
+  /* Changing delete from link to button necessitates baseline styling */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .icon-btn:hover {
@@ -85,11 +91,11 @@
 }
 
 /* Play: primary action */
-.icon-btn.play {
-  font-weight: 600;
+.icon-btn.play:hover {
+  color: light-dark(var(--accent-light), var(--accent-dark));
 }
 
-/* Delete: destructive */
+/* Delete: destructive modal */
 .icon-btn.delete:hover {
   color: #cf222e;
 }
@@ -136,4 +142,31 @@ details[open] .item-body {
 .item-body ul {
   margin: 0.75rem 0 1rem;
   padding-left: 1.25rem;
+}
+
+/* Add a create new item at the bottom of each list */
+.add-new {
+  border-top: 1px solid light-dark(var(--border-light), var(--border-dark));
+}
+
+.add-new-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.1rem;
+  text-decoration: none;
+  color: light-dark(var(--text-light), var(--text-dark));
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  /* Too big for accent -- honestly just one row expanded is headache-inducing */
+  /* background-color: light-dark(var(--accent-light), var(--accent-dark)); */
+  font-weight: 600;
+}
+
+.add-new-link:hover {
+  filter: brightness(1.1);
+}
+
+.add-new-link i {
+  font-size: 1.1rem;
+  opacity: 0.9;
 }
