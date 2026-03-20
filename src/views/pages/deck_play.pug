@@ -8,8 +8,8 @@ block content
     if deck.description
       p.mb-4= deck.description
 
-    #deckCarousel.carousel.slide(data-bs-interval="false" data-bs-ride="false")
-      .carousel-inner
+    #deckSlider.custom-slider
+      .slider-inner
         if deck.cards && deck.cards.length
           each card, i in deck.cards
             +cardSlide(card, i === 0 ? 'active' : '')
@@ -17,9 +17,9 @@ block content
           each mcq, i in deck.multipleChoices
             +mcqSlide(mcq, i === 0 ? 'active' : '')
 
-      button.carousel-control-prev(type="button", data-bs-target="#deckCarousel", data-bs-slide="prev")
-        span.carousel-control-prev-icon
+      button.slider-control.slider-prev(type="button")
+        i.bi.bi-chevron-left 
         span.visually-hidden Previous
-      button.carousel-control-next(type="button", data-bs-target="#deckCarousel", data-bs-slide="next")
-        span.carousel-control-next-icon
+      button.slider-control.slider-next(type="button")
+        i.bi.bi-chevron-right 
         span.visually-hidden Next

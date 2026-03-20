@@ -1,8 +1,7 @@
 mixin cardSlide(card, activeClass)
-  .carousel-item(class=activeClass)
-    .flip-card.study-card
-      .flip-card-inner
-        .flip-card-front
-          p.card-question= card.question
-        .flip-card-back
-          p.card-answer= card.answer
+  .slide-item(class=activeClass)
+    .flip-card.card-base
+      .flip-card-front
+        p.card-question= card.question
+      .flip-card-back
+        p.card-answer= card.answer

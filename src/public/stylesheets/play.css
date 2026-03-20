@@ -1,18 +1,20 @@
 /* This file contains styles for the `deck_play.pug` page and its related components, from which users
  * can play a deck of flashcards or multiple-choice questions (MCQs).
  *
- * A wireframe can be found in the README. To recap: A Bootstrap carousel occupies the main content space.
- * The carousel is populated with interactive cards. Flashcards flip to show the answer when tapped. MCQs
- * present a list of radio buttons; the correct answer is highlighted green, and incorrect answers red.
+ * A wireframe can be found in the README. To recap: A carousel occupies the main content space. At any
+ * time a single card is rendered on screen. Flashcards can be tapped to flip and reveal their answer, and
+ * multiple-choice questions (MCQs) present a list of options which, when tapped, highlight green or red
+ * and reveal the correct answer. Beneath the card are the navigation buttons, which echo the styling of
+ * the "Start" button on the main page.
  */
 
+/* Deck Play Layout */
 .play-deck {
   width: min(var(--content-max-width), 95%);
   margin: 2rem auto;
   text-align: center;
 }
 
-/* Deck title & description */
 .play-deck h1 {
   text-align: center;
 }
@@ -21,96 +23,86 @@
   color: light-dark(var(--text-muted-light), var(--text-muted-dark));
 }
 
-/* Carousel container */
-#deckCarousel {
-  margin-top: 2rem;
+/* Slider replaces bs.carousel */
+.slide-item {
+  display: none;
+  min-height: 60vh;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Carousel controls */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
-}
-
-/* Flashcards and MCQ share styling to create a cohesive look */
-.study-card,
-.mcq-card {
-  max-width: 24rem; /* narrower for breathing room */
-  width: 100%;
-  min-height: 20rem;
-
-  background-color: #ffffff; /* always white */
-  color: #222222; /* always dark text */
-
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  padding: 1.75rem 1.5rem;
-
+.slide-item.active {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
-/* TEST */
-.flip-card {
-  max-width: 24rem; /* narrower for breathing room */
+/* Card base is shared by flashcards and MCQs */
+.card-base {
   width: 100%;
+  max-width: 24rem;
   min-height: 20rem;
 
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
-  padding: 1.75rem 1.5rem;
+  background: #fff;
+  color: #222;
 
+  padding: 1.75rem 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
-/* Flashcard flip styling */
+/* Flashcard */
 .flip-card {
   position: relative;
-  perspective: 1000px;
   cursor: pointer;
-}
+  perspective: 1000px;
 
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.6s ease;
 }
 
-.flip-card.flipped .flip-card-inner {
+.flip-card.flipped {
   transform: rotateY(180deg);
 }
 
 .flip-card-front,
 .flip-card-back {
   position: absolute;
+  top: 0;
+  left: 0;
+
   width: 100%;
   height: 100%;
+
   backface-visibility: hidden;
+  border-radius: inherit;
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: inherit;
 }
 
 .flip-card-back {
   transform: rotateY(180deg);
 }
 
-/* Question/answer text */
 .card-question,
 .card-answer {
   font-size: 1.05rem;
+  text-align: center;
 }
 
-/* MCQ card styling */
+/* MCQs */
 .mcq-card {
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
-  pointer-events: auto; /* ensure clicks reach options */
 }
 
-/* Image region */
 .mcq-image-wrapper {
   width: 100%;
   max-height: 40%;
@@ -128,22 +120,24 @@
   border-radius: var(--radius-md);
 }
 
-/* Question text */
 .mcq-question {
   font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
-/* Options list */
 .mcq-options {
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-top: auto; /* push options downward */
+  margin-top: auto;
 }
 
+/* Make the row clickable */
 .mcq-option {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -151,28 +145,28 @@
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius-md);
   margin-bottom: 0.4rem;
-
-  cursor: pointer;
   border: 1px solid transparent;
 }
 
-/* Radio input */
+/* Hide the radio button but keep it accessible */
 .mcq-option input[type="radio"] {
-  margin: 0;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* Option text */
 .mcq-option span {
   font-size: 0.98rem;
 }
 
-/* Hover */
+/* Hover feedback */
 .mcq-option:hover {
   background-color: light-dark(#f2f2f2, #e0e0e0);
 }
 
 /* Correct / incorrect states */
-.mcq-option.correct {
+.mcq-option.correct,
+.mcq-option.correct-reveal {
   color: #155724;
   background-color: #e6ffe6;
   border-color: #b2e2b2;
@@ -184,54 +178,21 @@
   border-color: #f5b5b5;
 }
 
-/* Reveal correct answer without background */
-.mcq-option.correct-reveal {
-  color: #155724;
-  background-color: transparent;
-  border-color: transparent;
+/* Slider control buttons */
+.slider-control {
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: white;
+  width: 3rem;
+  height: 3rem;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 2rem 2rem;
 }
 
-/* Disable Bootstrap's slide stacking and transforms */
-.carousel-inner {
-  overflow: hidden; /* Should keep offscreen slide from lurking behind focus card */
+.slider-control:hover {
+  background-color: light-dark(var(--accent-light), var(--accent-dark));
+  transform: scale(1.1);
 }
-
-/* Base slide behavior: NO transforms, NO stacking */
-.carousel-item {
-  position: static !important;
-  transform: none !important;
-  transition: none !important;
-  opacity: 1 !important;
-
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  pointer-events: none; /* Prevent carousel from intercepting clicks */
-}
-
-/* Hide Bootstrap's "next" and "prev" slides completely */
-.carousel-item-next,
-.carousel-item-prev,
-.carousel-item-start,
-.carousel-item-end {
-  position: static !important;
-  transform: none !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Only the active slide should receive clicks */
-.carousel-item.active {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
-/* DEBUG */
-/* .flip-card {
-  border: dashed 3px magenta !important;
-}
-.mcq-card {
-  border: dashed 3px lime !important;
-} */
