@@ -196,3 +196,43 @@
   background-color: light-dark(var(--accent-light), var(--accent-dark));
   transform: scale(1.1);
 }
+
+/* Credit CSS-tricks for CSS timer bar */
+.round-time-bar {
+  height: 0.6rem;
+  background: light-dark(var(--surface-muted-light), var(--surface-muted-dark));
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+}
+
+.round-time-bar div {
+  width: 100%;
+  height: 40%;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    to bottom,
+    color-mix(
+      in srgb,
+      light-dark(var(--accent-light), var(--accent-dark)) 80%,
+      white
+    ),
+    light-dark(var(--accent-light), var(--accent-dark))
+  );
+
+  box-shadow:
+    0 0 4px light-dark(var(--accent-light), var(--accent-dark)),
+    0 0 8px light-dark(var(--accent-light), var(--accent-dark));
+
+  animation: roundtime calc(var(--duration) * 1s) linear forwards;
+}
+
+@keyframes roundtime {
+  to {
+    /* Transform is more performant but sharpens border-radius as x -> 0 */
+    /* transform: scaleX(0); */
+    width: 0%;
+  }
+}

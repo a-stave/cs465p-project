@@ -17,6 +17,8 @@ block content
           each mcq, i in deck.multipleChoices
             +mcqSlide(mcq, i === 0 ? 'active' : '')
 
+      .round-time-bar(data-style="smooth" style="--duration: 5;")
+        div 
       button.slider-control.slider-prev(type="button")
         i.bi.bi-chevron-left 
         span.visually-hidden Previous

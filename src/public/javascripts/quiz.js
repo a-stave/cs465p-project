@@ -5,14 +5,71 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.querySelector(".slider-next");
 
   let index = 0;
+  let timerLocked = false;
+
+  function getTimer() {
+    return document.querySelector(".round-time-bar div");
+  }
+
+  function restartTimer() {
+    let timer = getTimer();
+    if (!timer) return;
+
+    // Remove old listeners by cloning
+    const clone = timer.cloneNode(true);
+    timer.parentNode.replaceChild(clone, timer);
+    timer = clone;
+
+    // Restart animation
+    timer.style.animation = "none";
+    timer.offsetHeight; // force reflow
+    timer.style.animation = "";
+
+    timer.addEventListener("animationend", handleTimerExpire);
+  }
 
   function showSlide(i) {
     slides.forEach((slide, n) => {
       slide.classList.toggle("active", n === i);
     });
 
+    timerLocked = false;
     resetFlashcards();
     resetMCQs();
+    restartTimer();
+  }
+
+  function pauseTimer() {
+    const timer = document.querySelector(".round-time-bar div");
+    if (timer) {
+      timer.style.animationPlayState = "paused";
+    }
+  }
+
+  function handleTimerExpire() {
+    const activeSlide = slides[index];
+    if (timerLocked) return;
+
+    // Flashcard?
+    const flashcard = activeSlide.querySelector(".flip-card");
+    if (flashcard) {
+      flashcard.classList.add("flipped");
+      return;
+    }
+
+    // MCQ?
+    const mcqGroup = activeSlide.querySelector(".mcq-options");
+    if (mcqGroup) {
+      const correct = mcqGroup.dataset.correct;
+      const options = mcqGroup.querySelectorAll(".mcq-option");
+
+      options.forEach((opt) => {
+        const radio = opt.querySelector("input[type='radio']");
+        if (radio && radio.value === correct) {
+          opt.classList.add("correct-reveal");
+        }
+      });
+    }
   }
 
   function resetFlashcards() {
@@ -44,23 +101,19 @@ document.addEventListener("DOMContentLoaded", () => {
           const radio = option.querySelector("input[type='radio']");
           if (!radio) return;
 
-          // Select the radio programmatically
           radio.checked = true;
 
-          // Clear previous states
           options.forEach((opt) => {
             opt.classList.remove("correct", "incorrect", "correct-reveal");
           });
 
           const selectedValue = radio.value;
 
-          // Apply correct/incorrect classes
           if (selectedValue === correctAnswer) {
             option.classList.add("correct");
           } else {
             option.classList.add("incorrect");
 
-            // Reveal correct answer
             options.forEach((opt) => {
               const optRadio = opt.querySelector("input[type='radio']");
               if (optRadio && optRadio.value === correctAnswer) {
@@ -68,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
               }
             });
           }
+          timerLocked = true;
+          pauseTimer();
         });
       });
     });
@@ -88,6 +143,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".flip-card").forEach((card) => {
     card.addEventListener("click", () => {
       card.classList.toggle("flipped");
+      timerLocked = true;
+      pauseTimer();
     });
   });
 
