@@ -26,7 +26,7 @@
 /* Slider replaces bs.carousel */
 .slide-item {
   display: none;
-  min-height: 60vh;
+  min-height: 45vh;
   align-items: center;
   justify-content: center;
 }
@@ -205,6 +205,7 @@
   display: flex;
   align-items: center;
   padding: 2px 4px;
+  margin: 2rem;
 }
 
 .round-time-bar div {
