@@ -48,7 +48,7 @@ I've taken a few screenshots in both light- and dark-theme so you can see how th
 </figure>
 <figure style="margin: 20px 0;">
   <p align="center">
-    <img src="./assets/readme/screenshot_home_mobile.png"
+    <img src="./assets/readme/screenshot_home_mobile.gif"
          width="300"
          alt="Screenshot of the app home view on a mobile device." />
   </p>
