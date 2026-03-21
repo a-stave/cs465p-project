@@ -2,11 +2,13 @@ extends ../layout
 
 block content
   section.page-container.form-panel
+    //- Return to list page
     a.back-link(href=backUrl)
       i.bi.bi-chevron-left  Back to All Decks
 
     h1= title
 
+    //- Let decks enlist cards/MCQs immediately
     form(method='POST')
       div.form-group
         label(for='name') Name:

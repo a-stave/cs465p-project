@@ -42,10 +42,11 @@ mixin collapsibleList(items, baseRoute, type)
                   else
                     li= option
 
+    //- An extra row lets users navigate to the create route without using navbar
     li.list-row.add-new 
       a.add-new-link(href=`/${baseRoute}/create`)
         i.bi.bi-plus-circle 
         span Add #{type.charAt(0).toUpperCase() + type.slice(1)}
 
-  //- Include the delete modal once per list
+  //- Include the delete modal in lists
   include delete_modal

@@ -3,6 +3,7 @@ include ../partials/components/card_slide.pug
 include ../partials/components/mcq_slide.pug
 
 block content
+  //- Deck title and description hangs above each card, which has a 5s timer
   section.play-deck.text-center
     h1= deck.name
     if deck.description
@@ -17,6 +18,7 @@ block content
           each mcq, i in deck.multipleChoices
             +mcqSlide(mcq, i === 0 ? 'active' : '')
 
+      //- UI including timer, left and right arrows
       .round-time-bar(data-style="smooth" style="--duration: 5;")
         div 
       button.slider-control.slider-prev(type="button")
