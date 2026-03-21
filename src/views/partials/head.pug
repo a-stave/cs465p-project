@@ -1,5 +1,12 @@
 head
-  title= title
+  //- Tab title: `Cram.io - Create Deck`
+  title
+    if title && title !== baseTitle
+      | #{baseTitle} - #{title ? title : ''}
+    else
+      | #{baseTitle}
+
+
   meta(charset='utf-8')
   meta(name='viewport', content='width=device-width, initial-scale=1')
 
@@ -14,6 +21,9 @@ head
   link(rel='stylesheet', href='/stylesheets/list.css')
   link(rel='stylesheet', href='/stylesheets/form.css')
   link(rel='stylesheet', href='/stylesheets/play.css')
+
+  //- No more favicon errors!
+  link(rel='icon', href='/images/favicon.ico' type='image/x-icon')
 
   //- Bootstrap JS
   script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js", integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q", crossorigin="anonymous" defer)

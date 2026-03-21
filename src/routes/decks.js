@@ -13,7 +13,6 @@ router.get("/create", deckController.deck_create_get);
 router.post("/create", deckController.deck_create_post);
 
 // Delete deck
-router.get("/:id/delete", deckController.deck_delete_get);
 router.post("/:id/delete", deckController.deck_delete_post);
 
 // Update deck

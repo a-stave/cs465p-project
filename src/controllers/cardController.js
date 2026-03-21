@@ -19,26 +19,8 @@ exports.card_list = async (req, res, next) => {
 };
 
 // Display detail page for a specific Card.
-exports.card_detail = async (req, res, next) => {
-  try {
-    const card = await Card.findByPk(req.params.id, {
-      include: Deck,
-    });
-
-    if (!card) {
-      const err = new Error("Card not found");
-      err.status = 404;
-      return next(err);
-    }
-
-    res.render("pages/card_detail", {
-      title: "Card Detail",
-      card,
-      decks: card.Decks,
-    });
-  } catch (err) {
-    next(err);
-  }
+exports.card_detail = (req, res) => {
+  res.redirect(`/cards/${req.params.id}/update`);
 };
 
 // Display Card create form on GET.
@@ -48,6 +30,7 @@ exports.card_create_get = async (req, res, next) => {
 
     res.render("pages/card_form", {
       title: "Create Card",
+      backUrl: "/cards",
       decks: allDecks,
     });
   } catch (err) {
@@ -97,52 +80,29 @@ exports.card_create_post = [
       const card = await Card.create(cardData);
       await card.setDecks(deckIds); // many-to-many join
 
-      res.redirect(card.url);
+      res.redirect("/cards");
     } catch (err) {
       next(err);
     }
   },
 ];
 
-// Display Card delete form on GET.
-exports.card_delete_get = async (req, res, next) => {
-  try {
-    const card = await Card.findByPk(req.params.id, {
-      include: Deck,
-    });
-
-    if (!card) {
-      const err = new Error("Card not found");
-      err.status = 404;
-      return next(err);
-    }
-
-    res.render("pages/card_delete", {
-      title: "Delete Card",
-      card,
-      decks: card.Decks,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-// Handle Card delete on POST.
+// Handle Card delete via API on POST.
 exports.card_delete_post = async (req, res, next) => {
   try {
-    const card = await Card.findByPk(req.body.cardid);
+    const cardId = req.params.id || req.body.cardid;
+    const card = await Card.findByPk(cardId);
 
     if (!card) {
-      const err = new Error("Card not found");
-      err.status = 404;
-      return next(err);
+      return res.status(404).json({ error: "Card not found" });
     }
 
     // Remove join-table entries first
     await card.setDecks([]);
 
     await card.destroy();
-    res.redirect("/cards");
+
+    return res.json({ success: true });
   } catch (err) {
     next(err);
   }
@@ -170,6 +130,7 @@ exports.card_update_get = async (req, res, next) => {
 
     res.render("pages/card_form", {
       title: "Update Card",
+      backUrl: "/cards",
       card,
       decks: allDecks,
     });
@@ -221,7 +182,7 @@ exports.card_update_post = [
       await card.update(updatedData);
       await card.setDecks(deckIds);
 
-      res.redirect(card.url);
+      res.redirect("/cards");
     } catch (err) {
       next(err);
     }

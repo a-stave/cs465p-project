@@ -12,7 +12,6 @@ router.get("/create", cardController.card_create_get);
 router.post("/create", cardController.card_create_post);
 
 // Delete card
-router.get("/:id/delete", cardController.card_delete_get);
 router.post("/:id/delete", cardController.card_delete_post);
 
 // Update card

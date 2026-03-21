@@ -1,6 +1,6 @@
 mixin mcqSlide(mcq, activeClass)
-  .carousel-item(class=activeClass)
-    .mcq-card
+  .slide-item(class=activeClass)
+    .mcq-card.card-base
       if mcq.imageUrl
         .mcq-image-wrapper
           img(src=mcq.imageUrl, alt='Related image')

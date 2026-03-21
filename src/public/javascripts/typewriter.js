@@ -1,6 +1,6 @@
-/* Credit CSS-Tricks for the typewriter effect!
-link: https://css-tricks.com/snippets/css/typewriter-effect/ */
-
+/**
+ * Credit: [CSS-Tricks typewriter effect](https://css-tricks.com/snippets/css/typewriter-effect/)
+ */
 class Typewriter {
   constructor(el, toRotate, period) {
     this.toRotate = toRotate;

@@ -19,26 +19,8 @@ exports.mcq_list = async (req, res, next) => {
 };
 
 // MCQ detail
-exports.mcq_detail = async (req, res, next) => {
-  try {
-    const mcq = await MultipleChoice.findByPk(req.params.id, {
-      include: Deck,
-    });
-
-    if (!mcq) {
-      const err = new Error("Multiple-choice question not found");
-      err.status = 404;
-      return next(err);
-    }
-
-    res.render("pages/mcq_detail", {
-      title: mcq.question,
-      mcq,
-      decks: mcq.Decks,
-    });
-  } catch (err) {
-    next(err);
-  }
+exports.mcq_detail = (req, res) => {
+  res.redirect(`/mcqs/${req.params.id}/update`);
 };
 
 // Create form GET
@@ -48,6 +30,7 @@ exports.mcq_create_get = async (req, res, next) => {
 
     res.render("pages/mcq_form", {
       title: "Create Multiple Choice Question",
+      backUrl: "/multiple-choice",
       decks: allDecks,
     });
   } catch (err) {
@@ -120,60 +103,30 @@ exports.mcq_create_post = [
     try {
       const mcq = await MultipleChoice.create(mcqData);
       await mcq.setDecks(deckIds);
-      res.redirect(mcq.url);
+
+      res.redirect("/multiple-choice");
     } catch (err) {
       next(err);
     }
   },
 ];
 
-// Delete GET
-exports.mcq_delete_get = async (req, res, next) => {
-  try {
-    const mcq = await MultipleChoice.findByPk(req.params.id, {
-      include: Deck,
-    });
-
-    if (!mcq) {
-      const err = new Error("Multiple-choice question not found");
-      err.status = 404;
-      return next(err);
-    }
-
-    res.render("pages/mcq_delete", {
-      title: "Delete Multiple Choice Question",
-      mcq,
-      decks: mcq.Decks,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-// Delete POST
+// Delete MCQ via API on POST.
 exports.mcq_delete_post = async (req, res, next) => {
   try {
-    const mcq = await MultipleChoice.findByPk(req.body.mcqid, {
-      include: Deck,
-    });
+    const mcqId = req.params.id || req.body.mcqid;
+    const mcq = await MultipleChoice.findByPk(mcqId);
 
     if (!mcq) {
-      const err = new Error("Multiple-choice question not found");
-      err.status = 404;
-      return next(err);
+      return res.status(404).json({ error: "MCQ not found" });
     }
 
-    if (mcq.Decks.length > 0) {
-      return res.render("pages/mcq_delete", {
-        title: "Delete Multiple Choice Question",
-        mcq,
-        decks: mcq.Decks,
-        error: "Remove this question from all decks before deleting.",
-      });
-    }
+    // Remove join-table entries first
+    await mcq.setDecks([]);
 
     await mcq.destroy();
-    res.redirect("/multiple-choice");
+
+    return res.json({ success: true });
   } catch (err) {
     next(err);
   }
@@ -198,6 +151,7 @@ exports.mcq_update_get = async (req, res, next) => {
 
     res.render("pages/mcq_form", {
       title: "Update Multiple Choice Question",
+      backUrl: "/multiple-choice",
       mcq,
       decks: allDecks,
     });
@@ -274,7 +228,7 @@ exports.mcq_update_post = [
       await mcq.update(updatedData);
       await mcq.setDecks(deckIds);
 
-      res.redirect(mcq.url);
+      res.redirect("/multiple-choice");
     } catch (err) {
       next(err);
     }

@@ -45,13 +45,13 @@
   --shadow-subtle: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
+/* Clamp helps font size adjust to media size -- needs tweaking though */
 html {
   font:
-    1.6rem/1.4 Verdana,
+    clamp(1.2rem, 1.8vw, 1.6rem) Verdana,
     Arial,
     sans-serif;
   scroll-behavior: smooth;
-  min-height: 100%;
 }
 
 body {

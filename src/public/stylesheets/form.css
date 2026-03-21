@@ -59,7 +59,12 @@ textarea.form-control {
 }
 
 /* Primary submit button matches homepage */
-.btn-primary {
+.form-actions {
+  text-align: center;
+  margin-top: 1.8rem;
+}
+
+#submit-button {
   border-radius: 999px;
   border: none;
   padding: 0.6rem 1.8rem;
@@ -68,8 +73,9 @@ textarea.form-control {
   box-shadow: var(--shadow-soft);
 }
 
-.btn-primary:hover {
-  filter: brightness(1.05);
+#submit-button:hover {
+  filter: brightness(1.1);
+  transform: scale(1.03);
 }
 
 /* Error list: styled alert */
@@ -80,4 +86,19 @@ form + ul {
   border-radius: var(--radius-md);
   background-color: light-dark(#ffe6e6, #4a1f1f);
   color: light-dark(#8b0000, #ffd6d6);
+}
+
+/* Back navigation next to header */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--text-muted-light);
+}
+
+.back-link:hover {
+  color: var(--accent-light);
 }
