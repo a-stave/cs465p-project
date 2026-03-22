@@ -2,6 +2,6 @@ mixin cardSlide(card, activeClass)
   .slide-item(class=activeClass)
     .flip-card.card-base
       .flip-card-front
-        p.card-question= card.question
+        h2.card-question= card.question
       .flip-card-back
-        p.card-answer= card.answer
+        h2.card-answer= card.answer

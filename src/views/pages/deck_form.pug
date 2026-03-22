@@ -26,30 +26,32 @@ block content
         )= deck ? deck.description : ''
 
       if cards.length
-        h3 Cards
-        each card in cards
-          div.form-check
-            input.form-check-input(
-              type='checkbox'
-              id='card-' + card.id
-              name='cards'
-              value=card.id
-              checked=card.checked
-            )
-            label.form-check-label(for='card-' + card.id)= card.question
+        fieldset.form-group
+          legend Cards
+          each card in cards
+            div.form-check
+              input.form-check-input(
+                type='checkbox'
+                id='card-' + card.id
+                name='cards'
+                value=card.id
+                checked=card.checked
+              )
+              label.form-check-label(for='card-' + card.id)= card.question
 
       if mcqs.length
-        h3 Multiple Choice Questions
-        each mcq in mcqs
-          div.form-check
-            input.form-check-input(
-              type='checkbox'
-              id='mcq-' + mcq.id
-              name='mcqs'
-              value=mcq.id
-              checked=mcq.checked
-            )
-            label.form-check-label(for='mcq-' + mcq.id)= mcq.question
+        fieldset.form-group
+          legend Multiple Choice Questions
+          each mcq in mcqs
+            div.form-check
+              input.form-check-input(
+                type='checkbox'
+                id='mcq-' + mcq.id
+                name='mcqs'
+                value=mcq.id
+                checked=mcq.checked
+              )
+              label.form-check-label(for='mcq-' + mcq.id)= mcq.question
 
       div.form-actions
         button#submit-button(type='submit') Submit

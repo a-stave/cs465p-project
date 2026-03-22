@@ -21,6 +21,7 @@ mixin collapsibleList(items, baseRoute, type)
 
               button.icon-btn.delete(
                 type="button"
+                aria-label=`Delete ${type}`
                 data-id=item.id
                 data-type=type 
                 data-route=baseRoute 

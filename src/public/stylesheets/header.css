@@ -70,6 +70,10 @@
   height: var(--footer-height);
 }
 
+.site-footer a {
+  color: light-dark(var(--header-text-light), var(--header-text-dark));
+}
+
 /* On small screens footer is hidden and header adopts background theme, inverting text */
 @media (max-width: 575.98px) {
   .site-footer {

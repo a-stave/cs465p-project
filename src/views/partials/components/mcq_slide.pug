@@ -3,10 +3,13 @@ mixin mcqSlide(mcq, activeClass)
     .mcq-card.card-base
       if mcq.imageUrl
         .mcq-image-wrapper
-          img(src=mcq.imageUrl, alt='Related image')
-      p.mcq-question= mcq.question
-      ul.mcq-options(data-correct=mcq.correctAnswer)
-        each option in mcq.options
-          li.mcq-option
-            input(type="radio", name=`mcq-${mcq.id}`, value=option)
-            span= option
+          img(src=mcq.imageUrl, alt=`Image for question: ${mcq.question}`)
+      fieldset.mcq-fieldset 
+        legend.mcq-questions= mcq.question
+        //- p.mcq-question= mcq.question
+        ul.mcq-options(data-correct=mcq.correctAnswer)
+          each option in mcq.options
+            li.mcq-option
+              label
+                input(type="radio", name=`mcq-${mcq.id}`, value=option)
+                span= option

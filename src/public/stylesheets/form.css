@@ -96,9 +96,9 @@ form + ul {
   margin-bottom: 1rem;
   text-decoration: none;
   font-weight: 500;
-  color: var(--text-muted-light);
+  color: light-dark(var(--text-muted-light), var(--text-muted-dark));
 }
 
 .back-link:hover {
-  color: var(--accent-light);
+  color: light-dark(var(--accent-light), var(--accent-dark));
 }

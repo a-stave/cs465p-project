@@ -44,17 +44,18 @@ block content
         )
 
       if decks.length
-        h3 Decks
-        each deck in decks
-          div.form-check
-            input.form-check-input(
-              type='checkbox'
-              id='deck-' + deck.id
-              name='decks'
-              value=deck.id
-              checked=deck.checked
-            )
-            label.form-check-label(for='deck-' + deck.id)= deck.name
+        fieldset.form-group
+          legend Decks
+          each deck in decks
+            div.form-check
+              input.form-check-input(
+                type='checkbox'
+                id='deck-' + deck.id
+                name='decks'
+                value=deck.id
+                checked=deck.checked
+              )
+              label.form-check-label(for='deck-' + deck.id)= deck.name
 
       div.form-actions
         button#submit-button(type='submit') Submit

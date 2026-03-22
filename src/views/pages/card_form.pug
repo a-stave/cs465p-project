@@ -27,8 +27,8 @@ block content
         )= card ? card.answer : ''
 
       if decks && decks.length
-        div.form-group
-          label Decks:
+        fieldset.form-group
+          legend Decks
           div
             each deck in decks
               div.form-check
